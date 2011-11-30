@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1F960628-59F4-4A21-99D2-9E5250CB08BA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Graphics.Tools.Noise</RootNamespace>
+    <AssemblyName>libnoise</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="src\Builder\NoiseMapBuilderCylinder.cs" />
+    <Compile Include="src\Builder\NoiseMapBuilderSphere.cs" />
+    <Compile Include="src\Filter\Pipe.cs" />
+    <Compile Include="src\Filter\SinFractal.cs" />
+    <Compile Include="src\IMap2D.cs" />
+    <Compile Include="src\IModule2D.cs" />
+    <Compile Include="src\CombinerModule.cs" />
+    <Compile Include="src\Combiner\Add.cs" />
+    <Compile Include="src\Combiner\Max.cs" />
+    <Compile Include="src\Combiner\Min.cs" />
+    <Compile Include="src\Combiner\Multiply.cs" />
+    <Compile Include="src\Combiner\Power.cs" />
+    <Compile Include="src\Combiner\Substract.cs" />
+    <Compile Include="src\Filter\SumFractal.cs" />
+    <Compile Include="src\Filter\HeterogeneousMultiFractal.cs" />
+    <Compile Include="src\Filter\HybridMultiFractal.cs" />
+    <Compile Include="src\Filter\MultiFractal.cs" />
+    <Compile Include="src\Filter\Billow.cs" />
+    <Compile Include="src\NoiseFilter.cs" />
+    <Compile Include="src\NoisePrimitive.cs" />
+    <Compile Include="src\Primitive\BevinsValue.cs" />
+    <Compile Include="src\IModule1D.cs" />
+    <Compile Include="src\IModule3D.cs" />
+    <Compile Include="src\IModule4D.cs" />
+    <Compile Include="src\Model\AbstractModel.cs" />
+    <Compile Include="src\Model\Cylinder.cs" />
+    <Compile Include="src\Model\Line.cs" />
+    <Compile Include="src\Model\Sphere.cs" />
+    <Compile Include="src\PrimitiveModule.cs" />
+    <Compile Include="src\Primitive\BevinsGradient.cs" />
+    <Compile Include="src\Primitive\ImprovedPerlin.cs" />
+    <Compile Include="src\Primitive\SimplexPerlin.cs" />
+    <Compile Include="src\Renderer\AbstractRenderer.cs" />
+    <Compile Include="src\Renderer\BitmapAdaptater.cs" />
+    <Compile Include="src\Renderer\ImageRenderer.cs" />
+    <Compile Include="src\Utils\DataMap.cs" />
+    <Compile Include="src\Renderer\Color.cs" />
+    <Compile Include="src\Modifier\ControlPoint.cs" />
+    <Compile Include="src\FilterModule.cs" />
+    <Compile Include="src\Primitive\Checkerboard.cs" />
+    <Compile Include="src\Primitive\Constant.cs" />
+    <Compile Include="src\Primitive\Cylinders.cs" />
+    <Compile Include="src\Filter\RidgedMultiFractal.cs" />
+    <Compile Include="src\Primitive\Spheres.cs" />
+    <Compile Include="src\Filter\Voronoi.cs" />
+    <Compile Include="src\Libnoise.cs" />
+    <Compile Include="src\Modifier\Cache.cs" />
+    <Compile Include="src\ModifierModule.cs" />
+    <Compile Include="src\Modifier\Abs.cs" />
+    <Compile Include="src\Modifier\Clamp.cs" />
+    <Compile Include="src\Modifier\Curve.cs" />
+    <Compile Include="src\Modifier\Exponent.cs" />
+    <Compile Include="src\Modifier\Invert.cs" />
+    <Compile Include="src\Modifier\ScaleBias.cs" />
+    <Compile Include="src\Modifier\Terrace.cs" />
+    <Compile Include="src\Module.cs" />
+    <Compile Include="src\NoiseQuality.cs" />
+    <Compile Include="src\SelectorModule.cs" />
+    <Compile Include="src\Selector\Blend.cs" />
+    <Compile Include="src\Selector\Select.cs" />
+    <Compile Include="src\TransformerModule.cs" />
+    <Compile Include="src\Transformer\Displace.cs" />
+    <Compile Include="src\Transformer\RotatePoint.cs" />
+    <Compile Include="src\Transformer\ScalePoint.cs" />
+    <Compile Include="src\Transformer\TranslatePoint.cs" />
+    <Compile Include="src\Transformer\Turbulence.cs" />
+    <Compile Include="src\Renderer\GradientColor.cs" />
+    <Compile Include="src\Renderer\GradientPoint.cs" />
+    <Compile Include="src\Renderer\Image.cs" />
+    <Compile Include="src\Builder\NoiseMap.cs" />
+    <Compile Include="src\Builder\NoiseMapBuilder.cs" />
+    <Compile Include="src\Builder\NoiseMapBuilderPlane.cs" />
+    <Compile Include="src\Model\Plane.cs" />
+    <Compile Include="src\Utils\BMPWriter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Docs\" />
+    <Folder Include="src\Ext\Unity3D\" />
+    <Folder Include="src\Ext\Xna\" />
+    <Folder Include="src\Writer\" />
+  </ItemGroup>
+</Project>
