@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -42,19 +42,19 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// Default edge-falloff value for the Select noise module.
 		/// </summary>
-		public const double DEFAULT_FALL_OFF = -1.0;
+		public const float DEFAULT_FALL_OFF = -1.0f;
 
 		/// <summary>
 		/// Default lower bound of the selection range for the
 		/// Select noise module.
 		/// </summary>
-		public const double DEFAULT_LOWER_BOUND = -1.0;
+		public const float DEFAULT_LOWER_BOUND = -1.0f;
 
 		/// <summary>
 		/// Default upper bound of the selection range for the
 		/// Select noise module.
 		/// </summary>
-		public const double DEFAULT_UPPER_BOUND = 1.0;
+		public const float DEFAULT_UPPER_BOUND = 1.0f;
 
 		#endregion
 
@@ -62,12 +62,12 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// Lower bound of the selection range.
 		/// </summary>
-		protected double _lowerBound = DEFAULT_LOWER_BOUND;
+		protected float _lowerBound = DEFAULT_LOWER_BOUND;
 
 		/// <summary>
 		/// Upper bound of the selection range.
 		/// </summary>
-		protected double _upperBound = DEFAULT_UPPER_BOUND;
+		protected float _upperBound = DEFAULT_UPPER_BOUND;
 
 		/// <summary>
 		/// The falloff value is the width of the edge transition at either
@@ -94,7 +94,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		///   if the output value from the control module is greater than 0.9
 		///   ( = 0.8 + 0.1).
 		/// </summary>
-		protected double _edgeFalloff = DEFAULT_FALL_OFF;
+		protected float _edgeFalloff = DEFAULT_FALL_OFF;
 
 		/// <summary>
 		/// 
@@ -117,26 +117,26 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// gets the lower bound
 		/// </summary>
-		public double LowerBound {
+		public float LowerBound {
 			get { return _lowerBound; }
 		}
 
 		/// <summary>
 		/// gets the upper bound
 		/// </summary>
-		public double UpperBound {
+		public float UpperBound {
 			get { return _upperBound; }
 		}
 
 		/// <summary>
 		/// Gets or sets the falloff value at the edge transition.
 		/// </summary>
-		public double EdgeFalloff {
+		public float EdgeFalloff {
 			get { return _edgeFalloff; }
 			set { 
 				// Make sure that the edge falloff curves do not overlap.
-				double boundSize = _upperBound - _lowerBound;
-				_edgeFalloff = (value > boundSize / 2)? boundSize / 2: value;
+				float boundSize = _upperBound - _lowerBound;
+				_edgeFalloff = (value > boundSize / 2.0f)? boundSize / 2.0f: value;
 			}
 		}
 
@@ -171,7 +171,7 @@ namespace Graphics.Tools.Noise.Modifier {
 
 		}//end Select
 
-		public Select(IModule controlModule, IModule rightModule, IModule leftModule, double lower, double upper, double edge) {
+		public Select(IModule controlModule, IModule rightModule, IModule leftModule, float lower, float upper, float edge) {
 
 			_controlModule = controlModule;
 			_leftModule = leftModule;
@@ -191,7 +191,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// </summary>
 		/// <param name="lower"></param>
 		/// <param name="upper"></param>
-		public void SetBounds(double lower, double upper){
+		public void SetBounds(float lower, float upper){
 			System.Diagnostics.Debug.Assert(_lowerBound < _upperBound, "Lower bound must lower than upper bound");
 			_lowerBound = lower;
 			_upperBound = upper;
@@ -212,10 +212,10 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
+		public float GetValue(float x, float y, float z) {
 
-			double controlValue = ((IModule3D)_controlModule).GetValue(x, y, z);
-			double alpha;
+			float controlValue = ((IModule3D)_controlModule).GetValue(x, y, z);
+			float alpha;
 
 			if(_edgeFalloff > 0.0) {
 
@@ -231,8 +231,8 @@ namespace Graphics.Tools.Noise.Modifier {
 					// The output value from the control module is near the lower end of the
 					// selector threshold and within the smooth curve. Interpolate between
 					// the output values from the first and second source modules.
-					double lowerCurve = (_lowerBound - _edgeFalloff);
-					double upperCurve = (_lowerBound + _edgeFalloff);
+					float lowerCurve = (_lowerBound - _edgeFalloff);
+					float upperCurve = (_lowerBound + _edgeFalloff);
 
 					alpha = Libnoise.SCurve3(
 						(controlValue - lowerCurve) / (upperCurve - lowerCurve)
@@ -257,8 +257,8 @@ namespace Graphics.Tools.Noise.Modifier {
 					// The output value from the control module is near the upper end of the
 					// selector threshold and within the smooth curve. Interpolate between
 					// the output values from the first and second source modules.
-					double lowerCurve = (_upperBound - _edgeFalloff);
-					double upperCurve = (_upperBound + _edgeFalloff);
+					float lowerCurve = (_upperBound - _edgeFalloff);
+					float upperCurve = (_upperBound + _edgeFalloff);
 
 					alpha = Libnoise.SCurve3(
 						(controlValue - lowerCurve) / (upperCurve - lowerCurve)

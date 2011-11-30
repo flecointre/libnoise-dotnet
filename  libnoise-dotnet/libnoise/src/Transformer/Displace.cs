@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -133,13 +133,13 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
+		public float GetValue(float x, float y, float z) {
 
 			// Get the output values from the three displacement modules.  Add each
 			// value to the corresponding coordinate in the input value.
-			double xDisplace = x + (((IModule3D)_xDisplaceModule).GetValue(x, y, z));
-			double yDisplace = y + (((IModule3D)_yDisplaceModule).GetValue(x, y, z));
-			double zDisplace = z + (((IModule3D)_zDisplaceModule).GetValue(x, y, z));
+			float xDisplace = x + (((IModule3D)_xDisplaceModule).GetValue(x, y, z));
+			float yDisplace = y + (((IModule3D)_yDisplaceModule).GetValue(x, y, z));
+			float zDisplace = z + (((IModule3D)_zDisplaceModule).GetValue(x, y, z));
 
 			// Retrieve the output value using the offsetted input value instead of
 			// the original input value.

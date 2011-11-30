@@ -1,20 +1,20 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
-// c# port by Frédéric Lecointre (frederic.lecointre@burnweb.net)
+
 
 namespace Graphics.Tools.Noise.Model {
 
@@ -45,21 +45,21 @@ namespace Graphics.Tools.Noise.Model {
 			/// <summary>
 			/// x coordinate of a position.
 			/// </summary>
-			public double x;
+			public float x;
 
 			/// <summary>
 			/// y coordinate of a position.
 			/// </summary>
-			public double y;
+			public float y;
 
 			/// <summary>
 			/// z coordinate of a position.
 			/// </summary>
-			public double z;
+			public float z;
 
 			#endregion
 
-			public Position(double x, double y, double z) {
+			public Position(float x, float y, float z) {
 				this.x = x;
 				this.y = y;
 				this.z = z;
@@ -129,7 +129,7 @@ namespace Graphics.Tools.Noise.Model {
 		/// <param name="x">x coordinate of the start position</param>
 		/// <param name="y">y coordinate of the start position</param>
 		/// <param name="z">z coordinate of the start position</param>
-		public void SetStartPoint(double x, double y, double z) {
+		public void SetStartPoint(float x, float y, float z) {
 			_startPosition.x = x;
 			_startPosition.y = y;
 			_startPosition.z = z;
@@ -142,7 +142,7 @@ namespace Graphics.Tools.Noise.Model {
 		/// <param name="x">x coordinate of the end position</param>
 		/// <param name="y">y coordinate of the end position</param>
 		/// <param name="z">z coordinate of the end position</param>
-		public void SetEndPoint(double x, double y, double z) {
+		public void SetEndPoint(float x, float y, float z) {
 			_endPosition.x = x;
 			_endPosition.y = y;
 			_endPosition.z = z;
@@ -163,16 +163,16 @@ namespace Graphics.Tools.Noise.Model {
 		/// </summary>
 		/// <param name="p">The distance along the line segment (ranges from 0.0 to 1.0)</param>
 		/// <returns>The output value from the noise module</returns>
-		public double GetValue(double p) {
+		public float GetValue(float p) {
 
-			double x = (_endPosition.x - _startPosition.x) * p + _startPosition.x;
-			double y = (_endPosition.y - _startPosition.y) * p + _startPosition.y;
-			double z = (_endPosition.z - _startPosition.z) * p + _startPosition.z;
+			float x = (_endPosition.x - _startPosition.x) * p + _startPosition.x;
+			float y = (_endPosition.y - _startPosition.y) * p + _startPosition.y;
+			float z = (_endPosition.z - _startPosition.z) * p + _startPosition.z;
 
-			double value = ((IModule3D)_sourceModule).GetValue(x, y, z);
+			float value = ((IModule3D)_sourceModule).GetValue(x, y, z);
 
 			if(_attenuate) {
-				return p * (1.0 - p) * 4 * value;
+				return p * (1.0f - p) * 4.0f * value;
 			}//end if
 			else {
 				return value;

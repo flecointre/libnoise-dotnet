@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace Graphics.Tools.Noise {
 
@@ -27,17 +27,17 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Default frequency for the noise module.
 		/// </summary>
-		public const double DEFAULT_FREQUENCY = 1.0;
+		public const float DEFAULT_FREQUENCY = 1.0f;
 
 		/// <summary>
 		/// Default lacunarity for the noise module.
 		/// </summary>
-		public const double DEFAULT_LACUNARITY = 2.0;
+		public const float DEFAULT_LACUNARITY = 2.0f;
 
 		/// <summary>
 		/// Default number of octaves for the noise module.
 		/// </summary>
-		public const double DEFAULT_OCTAVE_COUNT = 6;
+		public const float DEFAULT_OCTAVE_COUNT = 6.0f;
 
 		/// <summary>
 		/// Maximum number of octaves for a noise module.
@@ -47,17 +47,17 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Default offset
 		/// </summary>
-		public const double DEFAULT_OFFSET = 1.0;
+		public const float DEFAULT_OFFSET = 1.0f;
 
 		/// <summary>
 		/// Default gain
 		/// </summary>
-		public const double DEFAULT_GAIN = 2.0;
+		public const float DEFAULT_GAIN = 2.0f;
 
 		/// <summary>
 		/// Default spectral exponent
 		/// </summary>
-		public const double DEFAULT_SPECTRAL_EXPONENT = 0.9;
+		public const float DEFAULT_SPECTRAL_EXPONENT = 0.9f;
 
 		#endregion
 
@@ -66,7 +66,7 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Frequency of the first octave
 		/// </summary>
-		protected double _frequency = DEFAULT_FREQUENCY;
+		protected float _frequency = DEFAULT_FREQUENCY;
 
 		/// <summary>
 		/// The lacunarity specifies the frequency multipler between successive
@@ -76,7 +76,7 @@ namespace Graphics.Tools.Noise {
 		/// with the lacunarity value to determine the effects.  For best results,
 		/// set the lacunarity to a number between 1.5 and 3.5.
 		/// </summary>
-		protected double _lacunarity = DEFAULT_LACUNARITY;
+		protected float _lacunarity = DEFAULT_LACUNARITY;
 
 		/// <summary>
 		/// The number of octaves control the <i>amount of detail</i> of the
@@ -87,27 +87,27 @@ namespace Graphics.Tools.Noise {
 		/// coherent-noise functions that are added together to form noise.
 		///
 		/// </summary>
-		protected double _octaveCount = DEFAULT_OCTAVE_COUNT;
+		protected float _octaveCount = DEFAULT_OCTAVE_COUNT;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		protected double[] _spectralWeights = new double[MAX_OCTAVE];
+		protected float[] _spectralWeights = new float[MAX_OCTAVE];
 
 		/// <summary>
 		/// 
 		/// </summary>
-		protected double _offset = DEFAULT_OFFSET;
+		protected float _offset = DEFAULT_OFFSET;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		protected double _gain = DEFAULT_GAIN;
+		protected float _gain = DEFAULT_GAIN;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		protected double _spectralExponent = DEFAULT_SPECTRAL_EXPONENT;
+		protected float _spectralExponent = DEFAULT_SPECTRAL_EXPONENT;
 
 		/// <summary>
 		/// 
@@ -133,7 +133,7 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Gets or sets the frequency
 		/// </summary>
-		public double Frequency {
+		public float Frequency {
 			get { return _frequency; }
 			set { _frequency = value; }
 		}//end
@@ -141,7 +141,7 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Gets or sets the lacunarity
 		/// </summary>
-		public double Lacunarity {
+		public float Lacunarity {
 			get { return _lacunarity; }
 			set { 
 				_lacunarity = value; 
@@ -152,15 +152,15 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Gets or sets the number of octaves 
 		/// </summary>
-		public double OctaveCount {
+		public float OctaveCount {
 			get { return _octaveCount; }
-			set { _octaveCount = (double)Libnoise.Clamp(value, 1, MAX_OCTAVE); }
+			set { _octaveCount = Libnoise.Clamp(value, 1.0f, MAX_OCTAVE); }
 		}//end
 
 		/// <summary>
 		/// Gets or sets the offset
 		/// </summary>
-		public double Offset {
+		public float Offset {
 			get { return _offset; }
 			set { _offset = value; }
 		}//end Offset
@@ -168,7 +168,7 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Gets or sets the gain
 		/// </summary>
-		public double Gain {
+		public float Gain {
 			get { return _gain; }
 			set { _gain = value; }
 		}//end Gain
@@ -176,7 +176,7 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Gets or sets the spectralExponent
 		/// </summary>
-		public double SpectralExponent {
+		public float SpectralExponent {
 			get { return _spectralExponent; }
 			set {
 				_spectralExponent = value;
@@ -236,7 +236,7 @@ namespace Graphics.Tools.Noise {
 		/// <param name="lacunarity"></param>
 		/// <param name="exponent"></param>
 		/// <param name="octaveCount"></param>
-		protected FilterModule(double frequency, double lacunarity, double exponent, double octaveCount) {
+		protected FilterModule(float frequency, float lacunarity, float exponent, float octaveCount) {
 
 			_frequency = frequency;
 			_lacunarity = lacunarity;
@@ -260,7 +260,7 @@ namespace Graphics.Tools.Noise {
 			for(int i = 0; i < MAX_OCTAVE; i++) {
 
 				// determines how "heavy" is the i-th octave
-				_spectralWeights[i] = System.Math.Pow(_lacunarity, -i * _spectralExponent);
+				_spectralWeights[i] = (float)System.Math.Pow(_lacunarity, -i * _spectralExponent);
 
 			}//end for
 

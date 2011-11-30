@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -46,7 +46,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <summary>
 		/// Frequency of the concentric spheres.
 		/// </summary>
-		public const double DEFAULT_FREQUENCY = 1.0;
+		public const float DEFAULT_FREQUENCY = 1.0f;
 
 		#endregion
 
@@ -55,7 +55,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <summary>
 		/// Frequency of the concentric cylinders.
 		/// </summary>
-		protected double _frequency = DEFAULT_FREQUENCY;
+		protected float _frequency = DEFAULT_FREQUENCY;
 
 		#endregion
 
@@ -64,7 +64,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <summary>
 		/// Gets or sets the frequency
 		/// </summary>
-		public double Frequency {
+		public float Frequency {
 			get { return _frequency; }
 			set { _frequency = value; }
 		}//end
@@ -83,7 +83,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// Create a new Spheres generator with given values
 		/// </summary>
 		/// <param name="frequency"></param>
-		public Spheres(double frequency) {
+		public Spheres(float frequency) {
 			
 			_frequency = frequency;
 
@@ -100,17 +100,17 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
+		public float GetValue(float x, float y, float z) {
 
 			x *= _frequency;
 			y *= _frequency;
 			z *= _frequency;
 
-			double distFromCenter = System.Math.Sqrt(x * x + y * y + z * z);
-			double distFromSmallerSphere = distFromCenter - System.Math.Floor(distFromCenter);
-			double distFromLargerSphere = 1.0 - distFromSmallerSphere;
-			double nearestDist = System.Math.Min(distFromSmallerSphere, distFromLargerSphere);
-			return 1.0 - (nearestDist * 4.0); // Puts it in the -1.0 to +1.0 range.
+			float distFromCenter = (float)System.Math.Sqrt(x * x + y * y + z * z);
+			float distFromSmallerSphere = distFromCenter - (float)System.Math.Floor(distFromCenter);
+			float distFromLargerSphere = 1.0f - distFromSmallerSphere;
+			float nearestDist = System.Math.Min(distFromSmallerSphere, distFromLargerSphere);
+			return 1.0f - (nearestDist * 4.0f); // Puts it in the -1.0 to +1.0 range.
 
 		}//end GetValue
 

@@ -1,20 +1,20 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
-// c# port by Frédéric Lecointre (frederic.lecointre@burnweb.net)
+
 
 using System;
 namespace Graphics.Tools.Noise.Utils {
@@ -156,15 +156,15 @@ namespace Graphics.Tools.Noise.Utils {
 		/// <summary>
 		/// Gets the memory used (in Kb) for this map
 		/// </summary>
-		public double MemoryUsageKb {
-			get { return MemoryUsage/8192; }
+		public float MemoryUsageKb {
+			get { return MemoryUsage/8192.0f; }
 		}
 
 		/// <summary>
 		/// Gets the memory used (in Kb) for this map
 		/// </summary>
-		public double MemoryUsageMo {
-			get { return MemoryUsage/8388608; }
+		public float MemoryUsageMo {
+			get { return MemoryUsage/8388608.0f; }
 		}
 
 		#endregion

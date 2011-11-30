@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -55,7 +55,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// Default power for the Turbulence noise module
 		/// </summary>
-		public const double DEFAULT_POWER = 1.0;
+		public const float DEFAULT_POWER = 1.0f;
 
 		#endregion
 
@@ -64,7 +64,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// The power (scale) of the displacement.
 		/// </summary>
-		protected double _power = DEFAULT_POWER;
+		protected float _power = DEFAULT_POWER;
 
 		/// <summary>
 		/// The source input module
@@ -127,7 +127,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// The power of the turbulence determines the scaling factor that is
 		/// applied to the displacement amount.
 		/// </summary>
-		public double Power {
+		public float Power {
 			get { return _power; }
 			set { _power = value; }
 		}
@@ -162,7 +162,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <param name="yDistortModule">the noise module that displaces the y coordinate</param>
 		/// <param name="zDistortModule">the noise module that displaces the z coordinate</param>
 		/// <param name="power">the power of the turbulence</param>
-		public Turbulence(IModule source, IModule xDistortModule, IModule yDistortModule, IModule zDistortModule, double power) {
+		public Turbulence(IModule source, IModule xDistortModule, IModule yDistortModule, IModule zDistortModule, float power) {
 
 			_sourceModule = source;
 
@@ -185,7 +185,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
+		public float GetValue(float x, float y, float z) {
 
 			// Get the values from the three Perlin noise modules and
 			// add each value to each coordinate of the input value.  There are also
@@ -194,25 +194,25 @@ namespace Graphics.Tools.Noise.Tranformer {
 			// when multiplied by the frequency, are near an integer boundary.  This is
 			// due to a property of gradient coherent noise, which returns zero at
 			// integer boundaries.
-			double x0, y0, z0;
-			double x1, y1, z1;
-			double x2, y2, z2;
+			float x0, y0, z0;
+			float x1, y1, z1;
+			float x2, y2, z2;
 
-			x0 = x + (12414.0 / 65536.0);
-			y0 = y + (65124.0 / 65536.0);
-			z0 = z + (31337.0 / 65536.0);
+			x0 = x + (12414.0f / 65536.0f);
+			y0 = y + (65124.0f / 65536.0f);
+			z0 = z + (31337.0f / 65536.0f);
 
-			x1 = x + (26519.0 / 65536.0);
-			y1 = y + (18128.0 / 65536.0);
-			z1 = z + (60493.0 / 65536.0);
+			x1 = x + (26519.0f / 65536.0f);
+			y1 = y + (18128.0f / 65536.0f);
+			z1 = z + (60493.0f / 65536.0f);
 
-			x2 = x + (53820.0 / 65536.0);
-			y2 = y + (11213.0 / 65536.0);
-			z2 = z + (44845.0 / 65536.0);
+			x2 = x + (53820.0f / 65536.0f);
+			y2 = y + (11213.0f / 65536.0f);
+			z2 = z + (44845.0f / 65536.0f);
 
-			double xDistort = x + (((IModule3D)_xDistortModule).GetValue(x0, y0, z0) * _power);
-			double yDistort = y + (((IModule3D)_yDistortModule).GetValue(x1, y1, z1) * _power);
-			double zDistort = z + (((IModule3D)_zDistortModule).GetValue(x2, y2, z2) * _power);
+			float xDistort = x + (((IModule3D)_xDistortModule).GetValue(x0, y0, z0) * _power);
+			float yDistort = y + (((IModule3D)_yDistortModule).GetValue(x1, y1, z1) * _power);
+			float zDistort = z + (((IModule3D)_zDistortModule).GetValue(x2, y2, z2) * _power);
 
 			// Retrieve the output value at the offsetted input value instead of the
 			// original input value.

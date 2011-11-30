@@ -1,20 +1,20 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
-// c# port by Frédéric Lecointre (frederic.lecointre@burnweb.net)
+
 
 namespace Graphics.Tools.Noise.Model {
 
@@ -73,9 +73,9 @@ namespace Graphics.Tools.Noise.Model {
 		/// <param name="lat">The latitude of the input value, in degrees</param>
 		/// <param name="lon">The longitude of the input value, in degrees</param>
 		/// <returns>The output value from the noise module</returns>
-		public double GetValue(double lat, double lon) {
+		public float GetValue(float lat, float lon) {
 
-			double x = 0, y = 0, z = 0;
+			float x = 0.0f, y = 0.0f, z = 0.0f;
 			Libnoise.LatLonToXYZ(lat, lon, ref x, ref y, ref z);
 			return ((IModule3D)_sourceModule).GetValue(x, y, z);
 

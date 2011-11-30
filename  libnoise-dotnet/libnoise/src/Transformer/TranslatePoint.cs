@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -33,17 +33,17 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// The default translation amount to apply to the x coordinate
 		/// </summary>
-		public const double DEFAULT_TRANSLATE_X = 1.0;
+		public const float DEFAULT_TRANSLATE_X = 1.0f;
 
 		/// <summary>
 		/// The default translation amount to apply to the y coordinate
 		/// </summary>
-		public const double DEFAULT_TRANSLATE_Y = 1.0;
+		public const float DEFAULT_TRANSLATE_Y = 1.0f;
 
 		/// <summary>
 		/// The default translation amount to apply to the z coordinate
 		/// </summary>
-		public const double DEFAULT_TRANSLATE_Z = 1.0;
+		public const float DEFAULT_TRANSLATE_Z = 1.0f;
 
 		#endregion
 
@@ -56,17 +56,17 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// the translation amount to apply to the x coordinate
 		/// </summary>
-		protected double _xTranslate = DEFAULT_TRANSLATE_X;
+		protected float _xTranslate = DEFAULT_TRANSLATE_X;
 
 		/// <summary>
 		/// the translation amount to apply to the y coordinate
 		/// </summary>
-		protected double _yTranslate = DEFAULT_TRANSLATE_Y;
+		protected float _yTranslate = DEFAULT_TRANSLATE_Y;
 
 		/// <summary>
 		/// the translation amount to apply to the z coordinate
 		/// </summary>
-		protected double _zTranslate = DEFAULT_TRANSLATE_Z;
+		protected float _zTranslate = DEFAULT_TRANSLATE_Z;
 
 		#endregion
 
@@ -82,7 +82,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// Gets or sets the translation amount to apply to the x coordinate
 		/// </summary>
-		public double XTranslate {
+		public float XTranslate {
 			get { return _xTranslate; }
 			set { _xTranslate = value; }
 		}
@@ -90,7 +90,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// Gets or sets the translation amount to apply to the y coordinate
 		/// </summary>
-		public double YTranslate {
+		public float YTranslate {
 			get { return _yTranslate; }
 			set { _yTranslate = value; }
 		}
@@ -98,7 +98,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// Gets or sets the translation amount to apply to the z coordinate
 		/// </summary>
-		public double ZTranslate {
+		public float ZTranslate {
 			get { return _zTranslate; }
 			set { _zTranslate = value; }
 		}
@@ -129,7 +129,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <param name="x">the translation amount to apply to the x coordinate</param>
 		/// <param name="y">the translation amount to apply to the y coordinate</param>
 		/// <param name="z">the translation amount to apply to the z coordinate</param>
-		public TranslatePoint(IModule source, double x, double y, double z)
+		public TranslatePoint(IModule source, float x, float y, float z)
 			: this(source) {
 			_xTranslate = x;
 			_yTranslate = y;
@@ -148,7 +148,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
+		public float GetValue(float x, float y, float z) {
 			return ((IModule3D)_sourceModule).GetValue(x + _xTranslate, y + _yTranslate, z + _zTranslate);
 		}//end GetValue
 

@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -34,7 +34,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// Default exponent
 		/// noise module.
 		/// </summary>
-		public const double DEFAULT_EXPONENT = 1.0;
+		public const float DEFAULT_EXPONENT = 1.0f;
 
 		#endregion
 
@@ -42,7 +42,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// Exponent to apply to the output value from the source module.
 		/// </summary>
-		protected double _exponent = DEFAULT_EXPONENT;
+		protected float _exponent = DEFAULT_EXPONENT;
 
 		#endregion
 
@@ -50,7 +50,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// gets or sets the exponent
 		/// </summary>
-		public double ExponentValue {
+		public float ExponentValue {
 			get { return _exponent; }
 			set { _exponent = value; }
 		}
@@ -66,7 +66,7 @@ namespace Graphics.Tools.Noise.Modifier {
 			: base(source) {
 		}//end Exponent
 
-		public Exponent(IModule source, double exponent)
+		public Exponent(IModule source, float exponent)
 			: base(source) {
 			_exponent = exponent;
 		}//end Exponent
@@ -82,9 +82,10 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
-			double value = ((IModule3D)_sourceModule).GetValue(x, y, z);
-			return (System.Math.Pow(System.Math.Abs((value + 1.0) / 2.0), _exponent) * 2.0 - 1.0);
+		public float GetValue(float x, float y, float z) {
+			float value = ((IModule3D)_sourceModule).GetValue(x, y, z);
+			value = (value + 1.0f)/2.0f;
+			return ((float)System.Math.Pow(Libnoise.FastFloor(value), _exponent) * 2.0f - 1.0f);
 
 		}//end GetValue
 

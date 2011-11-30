@@ -1,17 +1,18 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -167,12 +168,12 @@ namespace Graphics.Tools.Noise {
 					break;
 
 				case NoisePrimitive.Cylinders:
-					pModule = new Cylinders((double)offset);
+					pModule = new Cylinders(offset);
 					seamless = false;
 					break;
 
 				case NoisePrimitive.Spheres:
-					pModule = new Spheres((double)offset);
+					pModule = new Spheres(offset);
 					seamless = false;
 					break;
 
@@ -216,31 +217,31 @@ namespace Graphics.Tools.Noise {
 				case NoiseFilter.MultiFractal:
 					fModule = new MultiFractal();
 					// Used to show the difference with our gradient color (-1 + 1)
-					scale = new ScaleBias(fModule, 1, -0.8);
+					scale = new ScaleBias(fModule, 1f, -0.8f);
 					break;
 
 				case NoiseFilter.Billow:
 					fModule = new Billow();
-					((Billow)fModule).Bias = -0.2;
-					((Billow)fModule).Scale = 2;
+					((Billow)fModule).Bias = -0.2f;
+					((Billow)fModule).Scale = 2f;
 					break;
 
 				case NoiseFilter.HeterogeneousMultiFractal:
 					fModule = new HeterogeneousMultiFractal();
 					// Used to show the difference with our gradient color (-1 + 1)
-					scale = new ScaleBias(fModule, -1, 2);
+					scale = new ScaleBias(fModule, -1f, 2f);
 					break;
 
 				case NoiseFilter.HybridMultiFractal:
 					fModule = new HybridMultiFractal();
 					// Used to show the difference with our gradient color (-1 + 1)
-					scale = new ScaleBias(fModule, 0.7, -2);
+					scale = new ScaleBias(fModule, 0.7f, -2f);
 					break;
 
 				case NoiseFilter.RidgedMultiFractal:
 					fModule = new RidgedMultiFractal();
 					// Used to show the difference with our gradient color (-1 + 1)
-					scale = new ScaleBias(fModule, 0.9, -1.25);
+					scale = new ScaleBias(fModule, 0.9f, -1.25f);
 					break;
 
 				case NoiseFilter.Voronoi:
@@ -272,17 +273,17 @@ namespace Graphics.Tools.Noise {
 
 				case "Spherical":
 					projection = new NoiseMapBuilderSphere();
-					((NoiseMapBuilderSphere)projection).SetBounds(-90.0, 90.0, -180.0, 180.0); // degrees
+					((NoiseMapBuilderSphere)projection).SetBounds(-90f, 90f, -180f, 180f); // degrees
 					break;
 
 				case "Cylindrical":
 					projection = new NoiseMapBuilderCylinder();
-					((NoiseMapBuilderCylinder)projection).SetBounds(-180.0, 180.0, -10.0, 10.0); 
+					((NoiseMapBuilderCylinder)projection).SetBounds(-180f, 180f, -10f, 10f); 
 					break;
 
 				case "Planar":
 				default:
-					double bound = 2;
+					float bound = 2f;
 					projection = new NoiseMapBuilderPlane(bound, bound*2, bound, bound*2, seamless);
 					//projection = new NoiseMapBuilderPlane(-bound, bound, -bound, bound, seamless);
 					//projection = new NoiseMapBuilderPlane(0, bound, 0, bound, seamless);

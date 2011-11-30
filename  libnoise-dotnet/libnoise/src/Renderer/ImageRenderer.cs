@@ -1,20 +1,20 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
-// c# port by Frédéric Lecointre (frederic.lecointre@burnweb.net)
+
 
 using System;
 namespace Graphics.Tools.Noise.Renderer {
@@ -153,27 +153,27 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <summary>
 		/// The azimuth of the light source, in degrees.
 		/// </summary>
-		double _lightAzimuth;
+		float _lightAzimuth;
 
 		/// <summary>
 		/// The brightness of the light source.
 		/// </summary>
-		double _lightBrightness;
+		float _lightBrightness;
 
 		/// <summary>
 		/// The contrast between areas in light and areas in shadow.
 		/// </summary>
-		double _lightContrast;
+		float _lightContrast;
 
 		/// <summary>
 		/// The elevation of the light source, in degrees.
 		/// </summary>
-		double _lightElevation;
+		float _lightElevation;
 
 		/// <summary>
 		/// The intensity of the light source.
 		/// </summary>
-		double _lightIntensity;
+		float _lightIntensity;
 
 		/// <summary>
 		/// The color of the light source.
@@ -193,22 +193,22 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <summary>
 		/// The cosine of the azimuth of the light source.
 		/// </summary>
-		double _cosAzimuth;
+		float _cosAzimuth;
 
 		/// <summary>
 		/// The cosine of the elevation of the light source.
 		/// </summary>
-		double _cosElevation;
+		float _cosElevation;
 
 		/// <summary>
 		/// The sine of the azimuth of the light source.
 		/// </summary>
-        double _sinAzimuth;
+        float _sinAzimuth;
 
 		/// <summary>
 		/// The sine of the elevation of the light source.
 		/// </summary>
-        double _sinElevation;
+        float _sinElevation;
 
 		#endregion
 
@@ -277,7 +277,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// - 180.0 degrees is west.
 		/// - 270.0 degrees is south.
 		/// </summary>
-		public double LightAzimuth {
+		public float LightAzimuth {
 			get { return _lightAzimuth; }
 			set { 
 				_lightAzimuth = value;
@@ -288,7 +288,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <summary>
 		/// Gets ors sets the brightness of the light source.
 		/// </summary>
-		public double LightBrightness {
+		public float LightBrightness {
 			get { return _lightBrightness; }
 			set {
 				_lightBrightness = value;
@@ -309,10 +309,10 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// and an elevation resolution of 1 meter, a good contrast amount to
 		/// use is ( 1.0 / h ).
 		/// </summary>
-		public double LightContrast {
+		public float LightContrast {
 			get { return _lightContrast; }
 			set {
-				if(value <= 0.0) {
+				if(value <= 0.0f) {
 					throw new ArgumentException("Contrast must be greater than 0");
 				}//end if
 				else {
@@ -329,7 +329,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// - 0 degrees is on the horizon.
 		/// - 90 degrees is straight up.
 		/// </summary>
-		public double LightElevation {
+		public float LightElevation {
 			get { return _lightElevation; }
 			set {
 				_lightElevation = value;
@@ -340,10 +340,10 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <summary>
 		/// Gets or sets the intensity of the light source.
 		/// </summary>
-		public double LightIntensity {
+		public float LightIntensity {
 			get { return _lightIntensity; }
 			set {
-				if(value < 0.0) {
+				if(value < 0.0f) {
 					throw new ArgumentException("Intensity must be greater or equals to 0");
 				}//end if
 				else {
@@ -371,11 +371,11 @@ namespace Graphics.Tools.Noise.Renderer {
 		public ImageRenderer() {
 			_lightEnabled = false;
 			_WrapEnabled = false;
-			_lightAzimuth = 45.0;
-			_lightBrightness = 1.0;
-			_lightContrast = 1.0;
-			_lightElevation = 45.0;
-			_lightIntensity = 1.0;
+			_lightAzimuth = 45.0f;
+			_lightBrightness = 1.0f;
+			_lightContrast = 1.0f;
+			_lightElevation = 45.0f;
+			_lightIntensity = 1.0f;
 			_lightColor = Color.WHITE;
 			_recalcLightValues = true;
 		}//end ImageRenderer
@@ -455,11 +455,11 @@ namespace Graphics.Tools.Noise.Renderer {
 
 					// Get the color based on the value at the current point in the noise
 					// map.
-					sourceColor = _gradient.GetColor((double)pSource);
+					sourceColor = _gradient.GetColor(pSource);
 
 					// If lighting is enabled, calculate the light intensity based on the
 					// rate of change at the current point in the noise map.
-					double lightIntensity;
+					float lightIntensity;
 
 					if (_lightEnabled){
 
@@ -528,11 +528,11 @@ namespace Graphics.Tools.Noise.Renderer {
 
 						// Get the noise value of the current point in the source noise map
 						// and the noise values of its four-neighbors.
-						double nc = (double)_noiseMap.GetValue(x, y);
-						double nl = (double)_noiseMap.GetValue(x + xLeftOffset, y);
-						double nr = (double)_noiseMap.GetValue(x + xRightOffset, y);
-						double nd = (double)_noiseMap.GetValue(x, y + yDownOffset);
-						double nu = (double)_noiseMap.GetValue(x, y + yUpOffset);
+						float nc  = _noiseMap.GetValue(x, y);
+						float nl = _noiseMap.GetValue(x + xLeftOffset, y);
+						float nr = _noiseMap.GetValue(x + xRightOffset, y);
+						float nd = _noiseMap.GetValue(x, y + yDownOffset);
+						float nu = _noiseMap.GetValue(x, y + yUpOffset);
 
 						// Now we can calculate the lighting intensity.
 						lightIntensity = CalcLightIntensity (nc, nl, nr, nd, nu);
@@ -541,7 +541,7 @@ namespace Graphics.Tools.Noise.Renderer {
 					}//end if
 					else {
 						// These values will apply no lighting to the destination image.
-						lightIntensity = 1.0;
+						lightIntensity = 1.0f;
 					}//end else
 
 					// Get the current background color from the background image.
@@ -575,29 +575,29 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="backgroundColor">The color from the background image at the corresponding position</param>
 		/// <param name="lightValue">The intensity of the light at that position</param>
 		/// <returns>The destination color</returns>
-        Color CalcDestColor(Color sourceColor, Color backgroundColor, double lightValue){
+        Color CalcDestColor(Color sourceColor, Color backgroundColor, float lightValue){
 
-			double sourceRed   = (double)sourceColor.Red   / 255.0;
-			double sourceGreen = (double)sourceColor.Green / 255.0;
-			double sourceBlue  = (double)sourceColor.Blue  / 255.0;
-			double sourceAlpha = (double)sourceColor.Alpha / 255.0;
+			float sourceRed   = sourceColor.Red   / 255.0f;
+			float sourceGreen = sourceColor.Green / 255.0f;
+			float sourceBlue  = sourceColor.Blue  / 255.0f;
+			float sourceAlpha = sourceColor.Alpha / 255.0f;
 
-			double backgroundRed   = (double)backgroundColor.Red   / 255.0;
-			double backgroundGreen = (double)backgroundColor.Green / 255.0;
-			double backgroundBlue  = (double)backgroundColor.Blue  / 255.0;
+			float backgroundRed   = backgroundColor.Red   / 255.0f;
+			float backgroundGreen = backgroundColor.Green / 255.0f;
+			float backgroundBlue  = backgroundColor.Blue  / 255.0f;
 
 			// First, blend the source color to the background color using the alpha
 			// of the source color.
-			double red   = Libnoise.Lerp(backgroundRed,   sourceRed  , sourceAlpha);
-			double green = Libnoise.Lerp(backgroundGreen, sourceGreen, sourceAlpha);
-			double blue  = Libnoise.Lerp(backgroundBlue,  sourceBlue , sourceAlpha);
+			float red   = Libnoise.Lerp(backgroundRed,   sourceRed  , sourceAlpha);
+			float green = Libnoise.Lerp(backgroundGreen, sourceGreen, sourceAlpha);
+			float blue  = Libnoise.Lerp(backgroundBlue,  sourceBlue , sourceAlpha);
 
 			if (_lightEnabled) {
 
 				// Now calculate the light color.
-				double lightRed   = lightValue * (double)_lightColor.Red   / 255.0;
-				double lightGreen = lightValue * (double)_lightColor.Green / 255.0;
-				double lightBlue  = lightValue * (double)_lightColor.Blue  / 255.0;
+				float lightRed   = lightValue * (float)_lightColor.Red   / 255.0f;
+				float lightGreen = lightValue * (float)_lightColor.Green / 255.0f;
+				float lightBlue  = lightValue * (float)_lightColor.Blue  / 255.0f;
 
 				// Apply the light color to the new color.
 				red   *= lightRed ;
@@ -613,9 +613,9 @@ namespace Graphics.Tools.Noise.Renderer {
 
 			// Rescale the color channels to a byte range and return the new color.
 			return new Color (
-				(byte)((uint)(red   * 255.0) & 0xff),
-				(byte)((uint)(green * 255.0) & 0xff),
-				(byte)((uint)(blue  * 255.0) & 0xff),
+				(byte)((uint)(red   * 255.0f) & 0xff),
+				(byte)((uint)(green * 255.0f) & 0xff),
+				(byte)((uint)(blue  * 255.0f) & 0xff),
 				Math.Max(sourceColor.Alpha, backgroundColor.Alpha)
 			);
 
@@ -630,30 +630,30 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="down">Elevation of the point directly below the center point</param>
 		/// <param name="up">Elevation of the point directly above the center point</param>
 		/// <returns>These values come directly from the noise map</returns>
-        double CalcLightIntensity (double center, double left, double right, double down, double up){
+        float CalcLightIntensity (float center, float left, float right, float down, float up){
 
 			// Recalculate the sine and cosine of the various light values if
 			// necessary so it does not have to be calculated each time this method is
 			// called.
 			if(_recalcLightValues){
 
-				_cosAzimuth = Math.Cos(_lightAzimuth * Libnoise.DEG2RAD);
-				_sinAzimuth = Math.Sin(_lightAzimuth * Libnoise.DEG2RAD);
-				_cosElevation = Math.Cos(_lightElevation * Libnoise.DEG2RAD);
-				_sinElevation = Math.Sin(_lightElevation * Libnoise.DEG2RAD);
+				_cosAzimuth = (float)Math.Cos(_lightAzimuth * Libnoise.DEG2RAD);
+				_sinAzimuth = (float)Math.Sin(_lightAzimuth * Libnoise.DEG2RAD);
+				_cosElevation = (float)Math.Cos(_lightElevation * Libnoise.DEG2RAD);
+				_sinElevation = (float)Math.Sin(_lightElevation * Libnoise.DEG2RAD);
 				_recalcLightValues = false;
 
 			}//end if
 
 			// Now do the lighting calculations.
-			const double I_MAX = 1.0;
-			double io = I_MAX * Libnoise.SQRT_2 * _sinElevation / 2.0;
-			double ix = (I_MAX - io) * _lightContrast * Libnoise.SQRT_2 * _cosElevation * _cosAzimuth;
-			double iy = (I_MAX - io) * _lightContrast * Libnoise.SQRT_2 * _cosElevation * _sinAzimuth;
-			double intensity = (ix * (left - right) + iy * (down - up) + io);
+			const float I_MAX = 1.0f;
+			float io = I_MAX * Libnoise.SQRT_2 * _sinElevation / 2.0f;
+			float ix = (I_MAX - io) * _lightContrast * Libnoise.SQRT_2 * _cosElevation * _cosAzimuth;
+			float iy = (I_MAX - io) * _lightContrast * Libnoise.SQRT_2 * _cosElevation * _sinAzimuth;
+			float intensity = (ix * (left - right) + iy * (down - up) + io);
 
 			if(intensity < 0.0) {
-				intensity = 0.0;
+				intensity = 0.0f;
 			}//end if
 
 			return intensity;

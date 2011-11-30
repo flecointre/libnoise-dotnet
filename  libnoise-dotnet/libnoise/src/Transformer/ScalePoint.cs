@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -32,17 +32,17 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// The default scaling factor applied to the x coordinate
 		/// </summary>
-		public const double DEFAULT_POINT_X = 1.0;
+		public const float DEFAULT_POINT_X = 1.0f;
 
 		/// <summary>
 		/// The default scaling factor applied to the y coordinate
 		/// </summary>
-		public const double DEFAULT_POINT_Y = 1.0;
+		public const float DEFAULT_POINT_Y = 1.0f;
 
 		/// <summary>
 		/// The default scaling factor applied to the z coordinate
 		/// </summary>
-		public const double DEFAULT_POINT_Z = 1.0;
+		public const float DEFAULT_POINT_Z = 1.0f;
 
 		#endregion
 
@@ -55,17 +55,17 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// the scaling factor applied to the x coordinate
 		/// </summary>
-		protected double _xScale = DEFAULT_POINT_X;
+		protected float _xScale = DEFAULT_POINT_X;
 
 		/// <summary>
 		/// the scaling factor applied to the y coordinate
 		/// </summary>
-		protected double _yScale = DEFAULT_POINT_Y;
+		protected float _yScale = DEFAULT_POINT_Y;
 
 		/// <summary>
 		/// the scaling factor applied to the z coordinate
 		/// </summary>
-		protected double _zScale = DEFAULT_POINT_Z;
+		protected float _zScale = DEFAULT_POINT_Z;
 
 		#endregion
 
@@ -81,7 +81,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// Gets or sets the scaling factor applied to the x coordinate
 		/// </summary>
-		public double XScale {
+		public float XScale {
 			get { return _xScale; }
 			set { _xScale = value; }
 		}
@@ -89,7 +89,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// Gets or sets the scaling factor applied to the y coordinate
 		/// </summary>
-		public double YScale {
+		public float YScale {
 			get { return _yScale; }
 			set { _yScale = value; }
 		}
@@ -97,7 +97,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <summary>
 		/// Gets or sets the scaling factor applied to the z coordinate
 		/// </summary>
-		public double ZScale {
+		public float ZScale {
 			get { return _zScale; }
 			set { _zScale = value; }
 		}
@@ -123,7 +123,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <param name="x">the scaling factor applied to the x coordinate</param>
 		/// <param name="y">the scaling factor applied to the y coordinate</param>
 		/// <param name="z">the scaling factor applied to the z coordinate</param>
-		public ScalePoint(IModule source, double x, double y, double z)
+		public ScalePoint(IModule source, float x, float y, float z)
 			:this(source){
 			_xScale = x;
 			_yScale = y;
@@ -142,7 +142,7 @@ namespace Graphics.Tools.Noise.Tranformer {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
+		public float GetValue(float x, float y, float z) {
 			return ((IModule3D)_sourceModule).GetValue(x * _xScale, y * _yScale, z * _zScale);
 		}//end GetValue
 
