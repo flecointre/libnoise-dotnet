@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -97,7 +97,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
+		public float GetValue(float x, float y, float z) {
 			return ValueCoherentNoise3D(x, y, z, _seed, _quality);
 		}//end GetValue
 
@@ -118,7 +118,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="seed">The random number seed</param>
 		/// <param name="quality">The quality of the coherent-noise</param>
 		/// <returns>The generated value-coherent-noise value</returns>
-		public static double ValueCoherentNoise3D(double x, double y, double z, long seed, NoiseQuality quality) {
+		public static float ValueCoherentNoise3D(float x, float y, float z, long seed, NoiseQuality quality) {
 
 			// Create a unit-length cube aligned along an integer boundary.  
 			// This cube surrounds the input point.
@@ -133,26 +133,26 @@ namespace Graphics.Tools.Noise.Primitive {
 
 			// Map the difference between the coordinates of the input value and the
 			// coordinates of the cube's outer-lower-left vertex onto an S-curve.
-			double xs = 0, ys = 0, zs = 0;
+			float xs = 0, ys = 0, zs = 0;
 
 			switch(quality) {
 
 				case NoiseQuality.Fast:
-					xs = (x - (double)x0);
-					ys = (y - (double)y0);
-					zs = (z - (double)z0);
+					xs = (x - (float)x0);
+					ys = (y - (float)y0);
+					zs = (z - (float)z0);
 					break;
 
 				case NoiseQuality.Standard:
-					xs = Libnoise.SCurve3(x - (double)x0);
-					ys = Libnoise.SCurve3(y - (double)y0);
-					zs = Libnoise.SCurve3(z - (double)z0);
+					xs = Libnoise.SCurve3(x - (float)x0);
+					ys = Libnoise.SCurve3(y - (float)y0);
+					zs = Libnoise.SCurve3(z - (float)z0);
 					break;
 
 				case NoiseQuality.Best:
-					xs = Libnoise.SCurve5(x - (double)x0);
-					ys = Libnoise.SCurve5(y - (double)y0);
-					zs = Libnoise.SCurve5(z - (double)z0);
+					xs = Libnoise.SCurve5(x - (float)x0);
+					ys = Libnoise.SCurve5(y - (float)y0);
+					zs = Libnoise.SCurve5(z - (float)z0);
 					break;
 			}//end switch
 
@@ -160,7 +160,7 @@ namespace Graphics.Tools.Noise.Primitive {
 			// the coherent-noise value at the input point, interpolate these eight
 			// noise values using the S-curve value as the interpolant (trilinear
 			// interpolation.)
-			double n0, n1, ix0, ix1, iy0, iy1;
+			float n0, n1, ix0, ix1, iy0, iy1;
 			n0   = ValueNoise3D(x0, y0, z0, seed);
 			n1   = ValueNoise3D(x1, y0, z0, seed);
 			ix0  = Libnoise.Lerp(n0, n1, xs);
@@ -198,8 +198,8 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="z">The z coordinate of the input value</param>
 		/// <param name="seed">A random number seed</param>
 		/// <returns>The generated value-noise value</returns>
-		public static double ValueNoise3D(int x, int y, int z, long seed) {
-			return 1.0 - ((double)IntValueNoise3D(x, y, z, seed) / 1073741824.0);
+		public static float ValueNoise3D(int x, int y, int z, long seed) {
+			return 1.0f - ((float)IntValueNoise3D(x, y, z, seed) / 1073741824.0f);
 		}  //end ValueNoise 
 
 		/// <summary>
@@ -242,7 +242,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="x">The input coordinate on the x-axis.</param>
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y) {
+		public float GetValue(float x, float y) {
 			return ValueCoherentNoise2D(x, y, _seed, _quality);
 		}//end GetValue
 
@@ -262,7 +262,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="seed">The random number seed</param>
 		/// <param name="quality">The quality of the coherent-noise</param>
 		/// <returns>The generated value-coherent-noise value</returns>
-		public double ValueCoherentNoise2D(double x, double y, long seed, NoiseQuality quality) {
+		public float ValueCoherentNoise2D(float x, float y, long seed, NoiseQuality quality) {
 
 			// Create a unit-length square aligned along an integer boundary.  
 			// This square surrounds the input point.
@@ -275,23 +275,23 @@ namespace Graphics.Tools.Noise.Primitive {
 
 			// Map the difference between the coordinates of the input value and the
 			// coordinates of the cube's outer-lower-left vertex onto an S-curve.
-			double xs = 0, ys = 0;
+			float xs = 0, ys = 0;
 
 			switch(quality) {
 
 				case NoiseQuality.Fast:
-					xs = (x - (double)x0);
-					ys = (y - (double)y0);
+					xs = (x - (float)x0);
+					ys = (y - (float)y0);
 					break;
 
 				case NoiseQuality.Standard:
-					xs = Libnoise.SCurve3(x - (double)x0);
-					ys = Libnoise.SCurve3(y - (double)y0);
+					xs = Libnoise.SCurve3(x - (float)x0);
+					ys = Libnoise.SCurve3(y - (float)y0);
 					break;
 
 				case NoiseQuality.Best:
-					xs = Libnoise.SCurve5(x - (double)x0);
-					ys = Libnoise.SCurve5(y - (double)y0);
+					xs = Libnoise.SCurve5(x - (float)x0);
+					ys = Libnoise.SCurve5(y - (float)y0);
 					break;
 			}//end switch
 
@@ -299,7 +299,7 @@ namespace Graphics.Tools.Noise.Primitive {
 			// the coherent-noise value at the input point, interpolate these four
 			// noise values using the S-curve value as the interpolant (trilinear
 			// interpolation.)
-			double n0, n1, ix0, ix1;
+			float n0, n1, ix0, ix1;
 
 			n0   = ValueNoise2D(x0, y0, seed);
 			n1   = ValueNoise2D(x1, y0, seed);
@@ -327,8 +327,8 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="y">The y coordinate of the input value</param>
 		/// <param name="seed">A random number seed</param>
 		/// <returns>The generated value-noise value</returns>
-		public  double ValueNoise2D(int x, int y, long seed) {
-			return 1.0 - ((double)IntValueNoise2D(x, y, seed) / 1073741824.0);
+		public  float ValueNoise2D(int x, int y, long seed) {
+			return 1.0f - ((float)IntValueNoise2D(x, y, seed) / 1073741824.0f);
 		}  //end ValueNoise 
 
 		/// <summary>
@@ -342,7 +342,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="x">The x coordinate of the input value</param>
 		/// <param name="y">The y coordinate of the input value</param>
 		/// <returns></returns>
-		public  double ValueNoise2D(int x, int y) {
+		public  float ValueNoise2D(int x, int y) {
 			return ValueNoise2D(x, y, _seed);
 		}  //end ValueNoise 
 
@@ -383,7 +383,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// </summary>
 		/// <param name="x">The input coordinate on the x-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x) {
+		public float GetValue(float x) {
 			return ValueCoherentNoise1D(x, _seed, _quality);
 		}//end GetValue
 
@@ -402,27 +402,27 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="seed">The random number seed</param>
 		/// <param name="quality">The quality of the coherent-noise</param>
 		/// <returns>The generated value-coherent-noise value</returns>
-		public static double ValueCoherentNoise1D(double x, long seed, NoiseQuality quality) {
+		public static float ValueCoherentNoise1D(float x, long seed, NoiseQuality quality) {
 
 			// Create a unit-length line aligned along an integer boundary.  
 			// This line surrounds the input point.
 			int x0 = (x > 0.0 ? (int)x: (int)x - 1);
 			int x1 = x0 + 1;
 
-			double xs = 0;
+			float xs = 0;
 
 			switch(quality) {
 
 				case NoiseQuality.Fast:
-					xs = (x - (double)x0);
+					xs = (x - (float)x0);
 					break;
 
 				case NoiseQuality.Standard:
-					xs = Libnoise.SCurve3(x - (double)x0);
+					xs = Libnoise.SCurve3(x - (float)x0);
 					break;
 
 				case NoiseQuality.Best:
-					xs = Libnoise.SCurve5(x - (double)x0);
+					xs = Libnoise.SCurve5(x - (float)x0);
 					break;
 			}//end switch
 
@@ -430,7 +430,7 @@ namespace Graphics.Tools.Noise.Primitive {
 			// the coherent-noise value at the input point, interpolate these two
 			// noise values using the S-curve value as the interpolant (trilinear
 			// interpolation.)
-			double n0, n1;
+			float n0, n1;
 
 			n0   = ValueNoise1D(x0, seed);
 			n1   = ValueNoise1D(x1, seed);
@@ -451,8 +451,8 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="x">The x coordinate of the input value</param>
 		/// <param name="seed">A random number seed</param>
 		/// <returns>The generated value-noise value</returns>
-		public static double ValueNoise1D(int x, long seed) {
-			return 1.0 - ((double)IntValueNoise1D(x, seed) / 1073741824.0);
+		public static float ValueNoise1D(int x, long seed) {
+			return 1.0f - ((float)IntValueNoise1D(x, seed) / 1073741824.0f);
 		}  //end ValueNoise 
 
 		/// <summary>
@@ -465,7 +465,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// </summary>
 		/// <param name="x">The x coordinate of the input value</param>
 		/// <returns></returns>
-		public static double ValueNoise1D(int x) {
+		public static float ValueNoise1D(int x) {
 			return ValueNoise1D(x, 0);
 		}  //end ValueNoise1D 
 

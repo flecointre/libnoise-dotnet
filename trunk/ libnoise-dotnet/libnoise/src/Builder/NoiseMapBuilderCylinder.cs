@@ -1,20 +1,20 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
-// c# port by Frédéric Lecointre (frederic.lecointre@burnweb.net)
+
 using System;
 using Graphics.Tools.Noise.Model;
 
@@ -50,22 +50,22 @@ namespace Graphics.Tools.Noise.Builder {
 		/// <summary>
 		/// Lower Angle boundary of the planar noise map, in units.
 		/// </summary>
-		double _lowerAngleBound;
+		float _lowerAngleBound;
 
 		/// <summary>
 		/// Lower Height boundary of the planar noise map, in units.
 		/// </summary>
-		double _lowerHeightBound;
+		float _lowerHeightBound;
 
 		/// <summary>
 		/// Upper Angle boundary of the planar noise map, in units.
 		/// </summary>
-		double _upperAngleBound;
+		float _upperAngleBound;
 
 		/// <summary>
 		/// Upper Height boundary of the planar noise map, in units.
 		/// </summary>
-		double _upperHeightBound;
+		float _upperHeightBound;
 
 		#endregion
 
@@ -74,28 +74,28 @@ namespace Graphics.Tools.Noise.Builder {
 		/// <summary>
 		/// Gets the lower Height boundary of the planar noise map, in units.
 		/// </summary>
-		public double LowerHeightBound {
+		public float LowerHeightBound {
 			get { return _lowerHeightBound; }
 		}
 
 		/// <summary>
 		/// Gets the lower Angle boundary of the planar noise map, in units.
 		/// </summary>
-		public double LowerAngleBound {
+		public float LowerAngleBound {
 			get { return _lowerAngleBound; }
 		}
 
 		/// <summary>
 		/// Gets the upper Angle boundary of the planar noise map, in units.
 		/// </summary>
-		public double UpperAngleBound {
+		public float UpperAngleBound {
 			get { return _upperAngleBound; }
 		}
 
 		/// <summary>
 		/// Gets the upper Height boundary of the planar noise map, in units.
 		/// </summary>
-		public double UpperHeightBound {
+		public float UpperHeightBound {
 			get { return _upperHeightBound; }
 		}
 
@@ -107,7 +107,7 @@ namespace Graphics.Tools.Noise.Builder {
 		/// Default constructor
 		/// </summary>
 		public NoiseMapBuilderCylinder() {
-			SetBounds(-180.0, 180.0, -10.0, 10.0); 
+			SetBounds(-180.0f, 180.0f, -10.0f, 10.0f); 
 		}//end NoiseMapBuilder
 
 		#endregion
@@ -126,7 +126,7 @@ namespace Graphics.Tools.Noise.Builder {
 		/// <param name="upperXBound">The upper Angle boundary of the noise map, in units.</param>
 		/// <param name="lowerZBound">The lower Height boundary of the noise map, in units.</param>
 		/// <param name="upperZBound">The upper Height boundary of the noise map, in units.</param>
-		public void SetBounds(double lowerAngleBound, double upperAngleBound, double lowerHeightBound, double upperHeightBound) {
+		public void SetBounds(float lowerAngleBound, float upperAngleBound, float lowerHeightBound, float upperHeightBound) {
 
 			if(lowerAngleBound >= upperAngleBound || lowerHeightBound >= upperHeightBound) {
 				throw new ArgumentException("Incoherent bounds : lowerAngleBound >= upperAngleBound or lowerZBound >= upperHeightBound");
@@ -184,14 +184,14 @@ namespace Graphics.Tools.Noise.Builder {
 			// Create the plane model.
 			Cylinder model = new Cylinder((IModule3D)_sourceModule);
 
-			double angleExtent  = _upperAngleBound  - _lowerAngleBound;
-			double heightExtent = _upperHeightBound - _lowerHeightBound;
+			float angleExtent  = _upperAngleBound  - _lowerAngleBound;
+			float heightExtent = _upperHeightBound - _lowerHeightBound;
 
-			double xDelta = angleExtent  / (double)_width;
-			double yDelta = heightExtent / (double)_height;
+			float xDelta = angleExtent  / (float)_width;
+			float yDelta = heightExtent / (float)_height;
 
-			double curAngle  = _lowerAngleBound;
-			double curHeight = _lowerHeightBound;
+			float curAngle  = _lowerAngleBound;
+			float curHeight = _lowerHeightBound;
 
 			// Fill every point in the noise map with the output values from the model.
 			for(int y = 0; y < _height; y++) {
@@ -215,10 +215,6 @@ namespace Graphics.Tools.Noise.Builder {
 			}//end for
 
 		}//end Build
-
-		#endregion
-
-		#region Internal
 
 		#endregion
 

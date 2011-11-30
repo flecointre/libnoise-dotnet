@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -47,7 +47,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// The cached output value at the cached input value.
 		/// </summary>
-		protected double _cachedValue = 0;
+		protected float _cachedValue = 0.0f;
 
 		/// <summary>
 		/// Determines if a cached output value is stored in this noise
@@ -58,17 +58,17 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// x coordinate of the cached input value.
 		/// </summary>
-		protected double _xCache = 0;
+		protected float _xCache = 0.0f;
 
 		/// <summary>
 		/// y coordinate of the cached input value.
 		/// </summary>
-		protected double _yCache = 0;
+		protected float _yCache = 0.0f;
 
 		/// <summary>
 		/// z coordinate of the cached input value.
 		/// </summary>
-		protected double _zCache = 0;
+		protected float _zCache = 0.0f;
 
 		#endregion
 
@@ -107,7 +107,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
+		public float GetValue(float x, float y, float z) {
 
 			//original code
 			//if(!(_isCached && x == _xCache && y == _yCache && z == _zCache)){ // Original condition

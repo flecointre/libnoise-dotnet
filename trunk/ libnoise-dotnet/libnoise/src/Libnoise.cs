@@ -1,20 +1,20 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
-// c# port by Frédéric Lecointre (frederic.lecointre@burnweb.net)
+
 using System;
 
 namespace Graphics.Tools.Noise {
@@ -34,32 +34,32 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Pi
 		/// </summary>
-		public const double PI = 3.1415926535897932385;
+		public const float PI = 3.1415926535897932385f;
 
 		/// <summary>
 		/// Square root of 2.
 		/// </summary>
-		public const double SQRT_2 = 1.4142135623730950488;
+		public const float SQRT_2 = 1.4142135623730950488f;
 
 		/// <summary>
 		/// Square root of 3.
 		/// </summary>
-		public const double SQRT_3 = 1.7320508075688772935;
+		public const float SQRT_3 = 1.7320508075688772935f;
 
 		/// <summary>
 		/// Square root of 5.
 		/// </summary>
-		public const double SQRT_5 = 2.2360679774997896964;
+		public const float SQRT_5 = 2.2360679774997896964f;
 
 		/// <summary>
 		/// Converts an angle from degrees to radians.
 		/// </summary>
-		public const double DEG2RAD = PI / 180.0;
+		public const float DEG2RAD = PI / 180.0f;
 
 		/// <summary>
 		/// Converts an angle from radians to degrees.
 		/// </summary>
-		public const double RAD2DEG = 1.0 / DEG2RAD;
+		public const float RAD2DEG = 1.0f / DEG2RAD;
 
 		#endregion
 
@@ -73,12 +73,12 @@ namespace Graphics.Tools.Noise {
 		/// <param name="x">By ref, this parameter contains the x coordinate</param>
 		/// <param name="y">By ref, this parameter contains the y coordinate</param>
 		/// <param name="z">By ref, this parameter contains the z coordinate</param>
-		public static void LatLonToXYZ (double lat, double lon, ref double x, ref double y, ref double z){
+		public static void LatLonToXYZ(float lat, float lon, ref float x, ref float y, ref float z) {
 
-			double r = Math.Cos(DEG2RAD * lat);
-			x = r * Math.Cos(DEG2RAD * lon);
-			y =     Math.Sin(DEG2RAD * lat);
-			z = r * Math.Sin(DEG2RAD * lon);
+			float r = (float)Math.Cos(DEG2RAD * lat);
+			x = r * (float)Math.Cos(DEG2RAD * lon);
+			y =     (float)Math.Sin(DEG2RAD * lat);
+			z = r * (float)Math.Sin(DEG2RAD * lon);
 
 		}//endLatLonToXYZ
 
@@ -97,7 +97,7 @@ namespace Graphics.Tools.Noise {
 		/// <param name="n1">The second value</param>
 		/// <param name="a">The alpha value</param>
 		/// <returns>The interpolated value</returns>
-		public static double Lerp(double n0, double n1, double a) {
+		public static float Lerp(float n0, float n1, float a) {
 			//return ((1.0 - a) * n0) + (a * n1);
 			return n0 + a * (n1 - n0);
 		}//end Lerp
@@ -115,11 +115,11 @@ namespace Graphics.Tools.Noise {
 		/// <param name="n3">The value after the second value</param>
 		/// <param name="a">The alpha value</param>
 		/// <returns>The interpolated value.</returns>
-		public static double Cerp(double n0, double n1, double n2, double n3, double a) {
-			double p = (n3 - n2) - (n0 - n1);
-			double q = (n0 - n1) - p;
-			double r = n2 - n0;
-			double s = n1;
+		public static float Cerp(float n0, float n1, float n2, float n3, float a) {
+			float p = (n3 - n2) - (n0 - n1);
+			float q = (n0 - n1) - p;
+			float r = n2 - n0;
+			float s = n1;
 			return p * a * a * a + q * a * a + r * a + s;
 		}//end Cerp
 
@@ -130,8 +130,8 @@ namespace Graphics.Tools.Noise {
 		/// </summary>
 		/// <param name="a">The value to map onto a cubic S-curve</param>
 		/// <returns>The mapped value</returns>
-		public static double SCurve3(double a) {
-			return (a * a * (3.0 - 2.0 * a));
+		public static float SCurve3(float a) {
+			return (a * a * (3.0f - 2.0f * a));
 		}//end SCurve3
 
 		/// <summary>
@@ -142,8 +142,8 @@ namespace Graphics.Tools.Noise {
 		/// </summary>
 		/// <param name="a">The value to map onto a quintic S-curve</param>
 		/// <returns>The mapped value</returns>
-		public static double SCurve5(double a) {
-			return a * a * a * (a * (a * 6 - 15) + 10);
+		public static float SCurve5(float a) {
+			return a * a * a * (a * (a * 6.0f - 15.0f) + 10.0f);
 
 			/* original libnoise code
 			double a3 = a * a * a;

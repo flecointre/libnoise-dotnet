@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the improved Ken Perlin's algorithm http://mrl.nyu.edu/~perlin/noise/
 // From Mathieu Muller's implementation http://www.xna-connection.com/post/Algorithme-de-Perlin-Noise-en-C
@@ -184,13 +184,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
-
-			// Make sure that these floating-point values have the same range as a 32-
-			// bit integer so that we can pass them to the coherent-noise functions.
-			x = Libnoise.ToInt32Range(x);
-			y = Libnoise.ToInt32Range(y);
-			z = Libnoise.ToInt32Range(z);
+		public float GetValue(float x, float y, float z) {
 
 			// Fast floor
 			int xf = (x > 0.0) ? (int)x: (int)x - 1;
@@ -204,12 +198,12 @@ namespace Graphics.Tools.Noise.Primitive {
 			int Z = zf & 255;
 
 			// Retrieve the decimal part of the cell = relative X,Y,Z of point in cube
-			x -= (double)xf;
-			y -= (double)yf;
-			z -= (double)zf;
+			x -= (float)xf;
+			y -= (float)yf;
+			z -= (float)zf;
 
 			// Smooth the curve
-			double u = 0.0, v = 0.0, w = 0.0;
+			float u = 0.0f, v = 0.0f, w = 0.0f;
 
 			switch(_quality) {
 
@@ -283,7 +277,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="y">The amount of the bias on the Y axis</param>
 		/// <param name="z">The amount of the bias on the Z axis</param>
 		/// <returns>The directional bias strength</returns>
-		protected double Grad(int hash, double x, double y, double z) {
+		protected float Grad(int hash, float x, float y, float z) {
 
 			/*
 			 * TODO Do this test to improve the method
@@ -332,7 +326,7 @@ namespace Graphics.Tools.Noise.Primitive {
 			// 14 | 1110 | y |  y
 			// 15 | 1111 | y | -y
 
-			double u = h < 8 ? x : y;
+			float u = h < 8 ? x : y;
 
 			// Result table for V
 			// ---+------+---+------
@@ -353,7 +347,7 @@ namespace Graphics.Tools.Noise.Primitive {
 			// 14 | 1110 | x | -x
 			// 15 | 1111 | z | -z
 
-			double v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+			float v = h < 4 ? y : h == 12 || h == 14 ? x : z;
 
 			// Result table for U+V
 			// ---+------+----+----+-------
@@ -393,12 +387,8 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="x">The input coordinate on the x-axis.</param>
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y){
-			// Make sure that these floating-point values have the same range as a 32-
-			// bit integer so that we can pass them to the coherent-noise functions.
-			x = Libnoise.ToInt32Range(x);
-			y = Libnoise.ToInt32Range(y);
-
+		public float GetValue(float x, float y){
+	
 			// Fast floor
 			int xf = (x > 0.0) ? (int)x: (int)x - 1;
 			int yf = (y > 0.0) ? (int)y: (int)y - 1;
@@ -408,11 +398,11 @@ namespace Graphics.Tools.Noise.Primitive {
 			int Y = yf & 255;
 
 			// Retrieve the decimal part of the cell
-			x -= (double)xf;
-			x -= (double)yf;
+			x -= (float)xf;
+			x -= (float)yf;
 
 			// Smooth the curve
-			double u = 0.0, v = 0.0;
+			float u = 0.0f, v = 0.0f;
 
 			switch(_quality) {
 
@@ -460,7 +450,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="x">The amount of the bias on the X axis</param>
 		/// <param name="y">The amount of the bias on the Y axis</param>
 		/// <returns>The directional bias strength</returns>
-		protected double Grad(int hash, double x, double y) {
+		protected float Grad(int hash, float x, float y) {
 			// Fetch the last 3 bits
 			int h = hash & 3;
 
@@ -471,7 +461,7 @@ namespace Graphics.Tools.Noise.Primitive {
 			//  2 | 0010 | x | -x
 			//  3 | 0011 | x | -x
 
-			double u = (h & 2) == 0 ? x : -x;
+			float u = (h & 2) == 0 ? x : -x;
 
 			// Result table for V
 			// ---+------+---+------
@@ -480,7 +470,7 @@ namespace Graphics.Tools.Noise.Primitive {
 			//  2 | 0010 | y |  y
 			//  3 | 0011 | y | -y
 
-			double v = (h & 1) == 0 ? y : -y;
+			float v = (h & 1) == 0 ? y : -y;
 
 			// Result table for U + V
 			// ---+------+----+----+--
@@ -501,11 +491,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// </summary>
 		/// <param name="x">The input coordinate on the x-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x){
-
-			// Make sure that these floating-point values have the same range as a 32-
-			// bit integer so that we can pass them to the coherent-noise functions.
-			x = Libnoise.ToInt32Range(x);
+		public float GetValue(float x){
 
 			// Fast floor
 			int xf = (x > 0.0) ? (int)x: (int)x - 1;
@@ -514,10 +500,10 @@ namespace Graphics.Tools.Noise.Primitive {
 			int X = xf & 255;
 
 			// Retrieve the decimal part of the cell
-			x -= (double)xf;
+			x -= (float)xf;
 
 			// Smooth the curve
-			double u = 0.0;
+			float u = 0.0f;
 
 			switch(_quality) {
 
@@ -544,7 +530,7 @@ namespace Graphics.Tools.Noise.Primitive {
 		/// <param name="hash">The random value telling in which direction the bias will occur</param>
 		/// <param name="x">The amount of the bias on the X axis</param>
 		/// <returns>The directional bias strength</returns>
-		protected double Grad(int hash, double x) {
+		protected float Grad(int hash, float x) {
 			// Result table
 			// ---+------+----
 			//  0 | 0000 |  x 

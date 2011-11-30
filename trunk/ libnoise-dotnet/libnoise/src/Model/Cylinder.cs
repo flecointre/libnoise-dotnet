@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -69,13 +69,13 @@ namespace Graphics.Tools.Noise.Model {
 		/// <param name="angle">The angle around the cylinder's center, in degrees</param>
 		/// <param name="height">The height along the y axis</param>
 		/// <returns>The output value from the noise module</returns>
-		public double GetValue(double angle, double height) {
+		public float GetValue(float angle, float height) {
 
-			double x, y, z;
+			float x, y, z;
 
-			x = System.Math.Cos(angle * Libnoise.DEG2RAD);
+			x = (float)System.Math.Cos(angle * Libnoise.DEG2RAD);
 			y = height;
-			z = System.Math.Sin(angle * Libnoise.DEG2RAD);
+			z = (float)System.Math.Sin(angle * Libnoise.DEG2RAD);
 
 			return ((IModule3D)_sourceModule).GetValue(x, y, z);
 

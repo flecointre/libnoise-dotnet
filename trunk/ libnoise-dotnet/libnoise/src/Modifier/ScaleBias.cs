@@ -1,17 +1,17 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
 
@@ -33,13 +33,13 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// Default scale
 		/// noise module.
 		/// </summary>
-		public const double DEFAULT_SCALE = 1.0;
+		public const float DEFAULT_SCALE = 1.0f;
 
 		/// <summary>
 		/// Default bias
 		/// noise module.
 		/// </summary>
-		public const double DEFAULT_BIAS = 0.0;
+		public const float DEFAULT_BIAS = 0.0f;
 
 		#endregion
 
@@ -47,12 +47,12 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// the scaling factor to apply to the output value from the source module.
 		/// </summary>
-		protected double _scale = DEFAULT_SCALE;
+		protected float _scale = DEFAULT_SCALE;
 
 		/// <summary>
 		/// the bias to apply to the scaled output value from the source module.
 		/// </summary>
-		protected double _bias = DEFAULT_BIAS;
+		protected float _bias = DEFAULT_BIAS;
 
 		#endregion
 
@@ -60,7 +60,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// gets or sets the scale value
 		/// </summary>
-		public double Scale {
+		public float Scale {
 			get { return _scale; }
 			set { _scale = value; }
 		}
@@ -68,7 +68,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <summary>
 		/// gets or sets the bias value
 		/// </summary>
-		public double Bias {
+		public float Bias {
 			get { return _bias; }
 			set { _bias = value; }
 		}
@@ -84,7 +84,7 @@ namespace Graphics.Tools.Noise.Modifier {
 			: base(source) {
 		}//end Exponent
 
-		public ScaleBias(IModule source, double scale, double bias)
+		public ScaleBias(IModule source, float scale, float bias)
 			: base(source) {
 			_scale = scale;
 			_bias = bias;
@@ -101,7 +101,7 @@ namespace Graphics.Tools.Noise.Modifier {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		public double GetValue(double x, double y, double z) {
+		public float GetValue(float x, float y, float z) {
 
 			return ((IModule3D)_sourceModule).GetValue(x, y, z) * _scale + _bias;
 

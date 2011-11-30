@@ -1,20 +1,20 @@
-﻿// This file is part of Libnoise c#.
+﻿// This file is part of libnoise-dotnet.
 //
-// Libnoise c# is free software: you can redistribute it and/or modify
+// libnoise-dotnet is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// Libnoise c# is distributed in the hope that it will be useful,
+// libnoise-dotnet is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 // 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Libnoise c#.  If not, see <http://www.gnu.org/licenses/>.
+// along with libnoise-dotnet.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // From the original Jason Bevins's Libnoise (http://libnoise.sourceforge.net)
-// c# port by Frédéric Lecointre (frederic.lecointre@burnweb.net)
+
 
 using System.Collections.Generic;
 using System;
@@ -93,25 +93,25 @@ namespace Graphics.Tools.Noise.Renderer {
 			get {
 				GradientColor gradient = new GradientColor();
 
-				gradient.AddGradientPoint(-1.0,		new Color(  0,   0, 128, 255)); // deeps
-				gradient.AddGradientPoint(-0.25,	new Color(  0,   0, 255, 255)); // shallow
-				gradient.AddGradientPoint(0.0,		new Color(  0, 128, 255, 255)); // shore
-				gradient.AddGradientPoint(0.0625,	new Color(240, 240,  64, 255)); // sand
-				gradient.AddGradientPoint(0.125,	new Color( 32, 160,   0, 255)); // grass
-				gradient.AddGradientPoint(0.375,	new Color(224, 224,   0, 255)); // dirt
-				gradient.AddGradientPoint(0.75,		new Color(128, 128, 128, 255)); // rock
-				gradient.AddGradientPoint(1.0,		new Color(255, 255, 255, 255)); // snow
+				gradient.AddGradientPoint(-1.0f,		new Color(  0,   0, 128, 255)); // deeps
+				gradient.AddGradientPoint(-0.25f,	new Color(  0,   0, 255, 255)); // shallow
+				gradient.AddGradientPoint(0.0f,		new Color(  0, 128, 255, 255)); // shore
+				gradient.AddGradientPoint(0.0625f,	new Color(240, 240,  64, 255)); // sand
+				gradient.AddGradientPoint(0.125f,	new Color( 32, 160,   0, 255)); // grass
+				gradient.AddGradientPoint(0.375f,	new Color(224, 224,   0, 255)); // dirt
+				gradient.AddGradientPoint(0.75f,		new Color(128, 128, 128, 255)); // rock
+				gradient.AddGradientPoint(1.0f,		new Color(255, 255, 255, 255)); // snow
 
 				/* From noise::utils
-				gradient.AddGradientPoint(-1.00, Color(0, 0, 128, 255));
-				gradient.AddGradientPoint(-0.20, Color(32, 64, 128, 255));
-				gradient.AddGradientPoint(-0.04, Color(64, 96, 192, 255));
-				gradient.AddGradientPoint(-0.02, Color(192, 192, 128, 255));
-				gradient.AddGradientPoint(0.00, Color(0, 192, 0, 255));
-				gradient.AddGradientPoint(0.25, Color(192, 192, 0, 255));
-				gradient.AddGradientPoint(0.50, Color(160, 96, 64, 255));
-				gradient.AddGradientPoint(0.75, Color(128, 255, 255, 255));
-				gradient.AddGradientPoint(1.00, Color(255, 255, 255, 255));
+				gradient.AddGradientPoint(-1.00f, Color(0, 0, 128, 255));
+				gradient.AddGradientPoint(-0.20f, Color(32, 64, 128, 255));
+				gradient.AddGradientPoint(-0.04f, Color(64, 96, 192, 255));
+				gradient.AddGradientPoint(-0.02f, Color(192, 192, 128, 255));
+				gradient.AddGradientPoint(0.00f, Color(0, 192, 0, 255));
+				gradient.AddGradientPoint(0.25f, Color(192, 192, 0, 255));
+				gradient.AddGradientPoint(0.50f, Color(160, 96, 64, 255));
+				gradient.AddGradientPoint(0.75f, Color(128, 255, 255, 255));
+				gradient.AddGradientPoint(1.00f, Color(255, 255, 255, 255));
 				*/
 
 				return gradient;
@@ -134,8 +134,8 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// </summary>
 		/// <param name="color">color at position -1 and 1</param>
 		public GradientColor(Color color) {
-			AddGradientPoint(-1.0, color);
-			AddGradientPoint(1.0, color);
+			AddGradientPoint(-1.0f, color);
+			AddGradientPoint(1.0f, color);
 		}//end GradiantColor
 
 		/// <summary>
@@ -144,8 +144,8 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="start">The start color at position -1</param>
 		/// <param name="end">The end color at position 1</param>
 		public GradientColor(Color start, Color end) {
-			AddGradientPoint(-1.0, start);
-			AddGradientPoint(1.0, end);
+			AddGradientPoint(-1.0f, start);
+			AddGradientPoint(1.0f, end);
 		}//end GradiantColor
 
 		#endregion
@@ -164,7 +164,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// </summary>
 		/// <param name="position">The position of this gradient point</param>
 		/// <param name="color">The color of this gradient point</param>
-        public void AddGradientPoint(double position, Color color){
+        public void AddGradientPoint(float position, Color color){
 			AddGradientPoint(new GradientPoint(position, color));
 		}//end AddGradientPoint
 
@@ -217,7 +217,7 @@ namespace Graphics.Tools.Noise.Renderer {
         /// </summary>
         /// <param name="position">The specified position</param>
         /// <returns>The color at that position</returns>
-		public Color GetColor(double position) {
+		public Color GetColor(float position) {
 
 			//System.Diagnostics.Debug.Assert(_gradientPoints.Count >= 2, "At least two points must be defined");
 
@@ -246,9 +246,9 @@ namespace Graphics.Tools.Noise.Renderer {
 			}//end if
 
 			// Compute the alpha value used for linear interpolation.
-			double input0 = _gradientPoints[index0].Position;
-			double input1 = _gradientPoints[index1].Position;
-			double alpha = (position - input0) / (input1 - input0);
+			float input0 = _gradientPoints[index0].Position;
+			float input1 = _gradientPoints[index1].Position;
+			float alpha = (position - input0) / (input1 - input0);
 
 			// Now perform the linear interpolation given the alpha value.
 			return Color.Lerp(_gradientPoints[index0].Color, _gradientPoints[index1].Color, (float)alpha);

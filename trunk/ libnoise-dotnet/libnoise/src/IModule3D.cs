@@ -35,7 +35,7 @@ namespace Graphics.Tools.Noise {
 		/// <param name="y">The input coordinate on the y-axis.</param>
 		/// <param name="z">The input coordinate on the z-axis.</param>
 		/// <returns>The resulting output value.</returns>
-		double GetValue(double x, double y, double z);
+		float GetValue(float x, float y, float z);
 
 		#endregion
 
