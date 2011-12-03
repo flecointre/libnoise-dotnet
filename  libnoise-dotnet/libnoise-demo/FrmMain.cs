@@ -15,6 +15,7 @@
 
 using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Globalization;
 using Graphics.Tools.Noise.Primitive;
@@ -405,11 +406,13 @@ namespace Graphics.Tools.Noise {
 			renderer.LightContrast = 8;
 			//renderer.LightEnabled = true;
 			
+			// Libnoise image struct strategy
 			//Graphics.Tools.Noise.Renderer.Image image = new Graphics.Tools.Noise.Renderer.Image();
 			//renderer.Image = image;
 
-			BitmapAdaptater bitmapAdaptater = new BitmapAdaptater(width, height);
-			renderer.Image = bitmapAdaptater;
+			// dotnet Bitmap Strategy
+			BitmapAdaptater bmpAdaptater = new BitmapAdaptater(width, height);
+			renderer.Image = bmpAdaptater;
 
 			renderer.CallBack = delegate(int line) {
 
@@ -439,15 +442,28 @@ namespace Graphics.Tools.Noise {
 				ts.Seconds, ts.Milliseconds *10
 			);
 
+			//----------------------------------------
+			// Normalmap rendering test
+			//
+			BitmapAdaptater nmapAdaptater = new BitmapAdaptater(width, height);
+			NormalMapRenderer nmap = new NormalMapRenderer();
+			nmap.Image = nmapAdaptater;
+			nmap.BumpHeight = 30.0f;
+			nmap.NoiseMap = noiseMap;
+			//nmap.Render();
+			//nmapAdaptater.Bitmap.Save("normalMap.png", ImageFormat.Png);
+			//----------------------------------------
+
 			// ------------------------------------------------------------------------------------------------
 			// 3 - Painting
 
+			// Save the file
+			//bmpAdaptater.Bitmap.Save("rendered.png",ImageFormat.Png);
 			_imageRendered.Width = width;
 			_imageRendered.Height = height;
 
 			//_imageRendered.Image = _bitmap;
-			_imageRendered.Image = bitmapAdaptater.Bitmap;
-			bitmapAdaptater.Bitmap.Save("rendered.bmp");
+			_imageRendered.Image = bmpAdaptater.Bitmap;
 
 			if(_imageRendered.Width > _panImageViewport.Width) {
 				_imageRendered.Left = 0;
@@ -477,7 +493,7 @@ namespace Graphics.Tools.Noise {
 			ts = TimeSpan.FromMilliseconds(elaspedTime);
 
 			// Format and display the TimeSpan value.
-			_lblLog.Text += String.Format("Total duration : {0:00}:{1:00} {2:00},{3:0000}\n",
+			_lblLog.Text += String.Format("Duration : {0:00}:{1:00} {2:00},{3:0000}\n",
 				ts.Hours, ts.Minutes,
 				ts.Seconds, ts.Milliseconds *10
 			);

@@ -19,12 +19,27 @@ using Graphics.Tools.Noise;
 
 namespace Graphics.Tools.Noise.Renderer {
 
+	/// A delegate to a callback function used by the Renderer classes.
+	///
+	/// The renderer method calls this callback function each
+	/// time it fills a row of the image.
+	///
+	/// This callback function has a single integer parameter that contains
+	/// a count of the rows that have been completed.  It returns void.
+	public delegate void RendererCallback(int row);
+
 	/// <summary>
 	/// Abstract base class for a renderer
 	/// </summary>
 	abstract public class AbstractRenderer {
 
 		#region Fields
+		/// <summary>
+		/// The callback function that Render() calls each time it fills a
+		/// row of the image.
+		/// </summary>
+		protected RendererCallback _callBack;
+
 		/// <summary>
 		/// The source noise map that contains the coherent-noise values.
 		/// </summary>
@@ -33,7 +48,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <summary>
 		/// The destination image
 		/// </summary>
-		protected IMap2D<Color> _image;
+		protected IMap2D<IColor> _image;
 
 		#endregion
 
@@ -50,13 +65,20 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <summary>
 		/// Gets or sets the destination image
 		/// </summary>
-		public IMap2D<Color> Image {
+		public IMap2D<IColor> Image {
 			get { return _image; }
 			set { _image = value; }
 		}
 
-		#endregion
+		/// <summary>
+		/// Gets or sets the callback function
+		/// </summary>
+		public RendererCallback CallBack {
+			get { return _callBack; }
+			set { _callBack = value; }
+		}
 
+		#endregion
 
 		#region Interaction
 
