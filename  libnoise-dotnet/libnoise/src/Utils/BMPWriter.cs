@@ -34,6 +34,8 @@ namespace Graphics.Tools.Noise.Utils {
 	/// - Pass the filename to the Filename property.
 	/// - Pass an Image object to the Image property.
 	/// - Call the WriteFile().
+	/// 
+	/// TODO convert BMPWriter to an extensible writing strategy based on image format (bmp, png, jpg, ...)
 	/// </summary>
 	public class BMPWriter {
 

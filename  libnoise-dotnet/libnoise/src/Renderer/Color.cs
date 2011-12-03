@@ -84,7 +84,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		}
 
 		/// <summary>
-		/// The bllue channel
+		/// The blue channel
 		/// </summary>
 		public byte Blue {
 			get { return _blue; }
