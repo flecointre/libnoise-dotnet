@@ -17,7 +17,9 @@
 // From Mathieu Muller's implementation http://www.xna-connection.com/post/Algorithme-de-Perlin-Noise-en-C
 
 // Debug purpose for the "seeded" random generator
+#if DEBUG // Only available in debug release
 #define NOISE_RANDOM_PARANOIA
+#endif
 
 using System;
 namespace Graphics.Tools.Noise.Primitive {

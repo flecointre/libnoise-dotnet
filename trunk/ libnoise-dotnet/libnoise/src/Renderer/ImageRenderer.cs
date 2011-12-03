@@ -19,15 +19,6 @@
 using System;
 namespace Graphics.Tools.Noise.Renderer {
 
-	/// A delegate to a callback function used by the ImageRenderer class.
-	///
-	/// The ImageRenderer::render() method calls this callback function each
-	/// time it fills a row of the image.
-	///
-	/// This callback function has a single integer parameter that contains
-	/// a count of the rows that have been completed.  It returns void.
-	public delegate void RendererCallback(int row);
-
 	/// <summary>
 	/// Renders an image from a noise map.
 	///
@@ -116,19 +107,14 @@ namespace Graphics.Tools.Noise.Renderer {
 	///
 	/// To render the image, perform the following steps:
 	/// - Pass a GradientColor object to the Gradient property.
-	/// - Pass a NoiseMap object to the NoiseMap property.
-	/// - Pass an Image object to the Image property.
+	/// - Pass a IMap2D<float> object to the NoiseMap property.
+	/// - Pass an IMap2D<Color> object to the Image property.
 	/// - Pass an Image object to the BackgroundImage property (optional)
 	/// - Call the Render() method.
 	/// </summary>
 	public class ImageRenderer: AbstractRenderer {
 
 		#region Fields
-		/// <summary>
-		/// The callback function that Render() calls each time it fills a
-		/// row of the image.
-		/// </summary>
-		protected RendererCallback _callBack;
 
 		/// <summary>
 		/// The background image
@@ -213,14 +199,6 @@ namespace Graphics.Tools.Noise.Renderer {
 		#endregion
 
 		#region Accessors
-
-		/// <summary>
-		/// Gets or sets the callback function
-		/// </summary>
-		public RendererCallback CallBack {
-			get { return _callBack; }
-			set { _callBack = value; }
-		}
 
 		/// <summary>
 		/// Enables or disables the light source.
@@ -443,8 +421,8 @@ namespace Graphics.Tools.Noise.Renderer {
 				_image.SetSize(width, height);
 			}//end if
 
-			Color backgroundColor = Color.WHITE;
-			Color sourceColor;
+			IColor backgroundColor = Color.WHITE;
+			IColor sourceColor;
 			float pSource;
 
 			for (int y = 0; y < height; y++){
@@ -575,7 +553,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="backgroundColor">The color from the background image at the corresponding position</param>
 		/// <param name="lightValue">The intensity of the light at that position</param>
 		/// <returns>The destination color</returns>
-        Color CalcDestColor(Color sourceColor, Color backgroundColor, float lightValue){
+		IColor CalcDestColor(IColor sourceColor, IColor backgroundColor, float lightValue) {
 
 			float sourceRed   = sourceColor.Red   / 255.0f;
 			float sourceGreen = sourceColor.Green / 255.0f;

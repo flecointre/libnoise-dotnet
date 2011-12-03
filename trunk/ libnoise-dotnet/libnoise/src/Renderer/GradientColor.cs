@@ -133,7 +133,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// Create a new GradientColor with one color
 		/// </summary>
 		/// <param name="color">color at position -1 and 1</param>
-		public GradientColor(Color color) {
+		public GradientColor(IColor color) {
 			AddGradientPoint(-1.0f, color);
 			AddGradientPoint(1.0f, color);
 		}//end GradiantColor
@@ -143,7 +143,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// </summary>
 		/// <param name="start">The start color at position -1</param>
 		/// <param name="end">The end color at position 1</param>
-		public GradientColor(Color start, Color end) {
+		public GradientColor(IColor start, IColor end) {
 			AddGradientPoint(-1.0f, start);
 			AddGradientPoint(1.0f, end);
 		}//end GradiantColor
@@ -164,7 +164,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// </summary>
 		/// <param name="position">The position of this gradient point</param>
 		/// <param name="color">The color of this gradient point</param>
-        public void AddGradientPoint(float position, Color color){
+        public void AddGradientPoint(float position, IColor color){
 			AddGradientPoint(new GradientPoint(position, color));
 		}//end AddGradientPoint
 
@@ -217,7 +217,7 @@ namespace Graphics.Tools.Noise.Renderer {
         /// </summary>
         /// <param name="position">The specified position</param>
         /// <returns>The color at that position</returns>
-		public Color GetColor(float position) {
+		public IColor GetColor(float position) {
 
 			//System.Diagnostics.Debug.Assert(_gradientPoints.Count >= 2, "At least two points must be defined");
 

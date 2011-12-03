@@ -25,13 +25,13 @@ namespace Graphics.Tools.Noise.Renderer {
 	///
 	/// These color values are of type Color.
 	/// </summary>
-	public class BitmapAdaptater : IMap2D<Color> {
+	public class BitmapAdaptater :IMap2D<IColor> {
 
 		#region Fields
 		/// <summary>
 		/// The value used for all positions outside of the map.
 		/// </summary>
-		protected Color _borderValue;
+		protected IColor _borderValue;
 
 		/// <summary>
 		/// The bitmap
@@ -59,7 +59,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <summary>
 		/// Gets the border value of the map
 		/// </summary>
-		public Color BorderValue {
+		public IColor BorderValue {
 			get { return _borderValue; }
 			set { _borderValue = value; }
 		}// end BorderValue
@@ -100,7 +100,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="x">The x coordinate of the position</param>
 		/// <param name="y">The y coordinate of the position</param>
 		/// <param name="value">The value to set at the given position</param>
-		public Color GetValue(int x, int y) {
+		public IColor GetValue(int x, int y) {
 
 			if(_adaptatee != null 
 				&& (x >= 0 && x < _adaptatee.Width) 
@@ -127,7 +127,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// </summary>
 		/// <param name="width">width The new width for the map</param>
 		/// <param name="height">height The new height for the map</param>
-		public void SetValue(int x, int y, Color value) {
+		public void SetValue(int x, int y, IColor value) {
 
 			if(_adaptatee != null 
 				&& (x >= 0 && x < _adaptatee.Width) 
@@ -168,7 +168,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// This method is a O(n) operation, where n is equal to width * height.
 		/// </summary>
 		/// <param name="color">The color that all positions within the bitmap are cleared to.</param>
-		public void Clear(Color color) {
+		public void Clear(IColor color) {
 			throw new System.NotImplementedException();
 		}//end Clear
 

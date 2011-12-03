@@ -38,7 +38,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <summary>
 		/// The color of this gradient point.
 		/// </summary>
-		public Color Color;
+		public IColor Color;
 
 		/// <summary>
 		/// The position of this gradient point.
@@ -54,7 +54,7 @@ namespace Graphics.Tools.Noise.Renderer {
 
 		#region Ctor/Dtor
 
-		public GradientPoint(float position, Color color) {
+		public GradientPoint(float position, IColor color) {
 			Color = color;
 			Position = position;
 			_hashcode = (int)Position ^Color.GetHashCode();

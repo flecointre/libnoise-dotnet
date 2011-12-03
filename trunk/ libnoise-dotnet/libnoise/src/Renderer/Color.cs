@@ -30,7 +30,7 @@ namespace Graphics.Tools.Noise.Renderer {
 	/// channel has a value of 0, the color is completely transparent.  If the
 	/// alpha channel has a value of 255, the color is completely opaque.
 	/// </summary>
-	public class Color :IEquatable<Color> {
+	public class Color :IEquatable<Color>, IColor {
 
 		#region fields
 
@@ -201,7 +201,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="color1"></param>
 		/// <param name="alpha"></param>
 		/// <returns></returns>
-		public static Color Lerp (Color color0, Color color1, float alpha){
+		public static IColor Lerp(IColor color0, IColor color1, float alpha) {
 
 			return new Color(
 				BlendChannel(color0.Red  , color1.Red  , alpha),
@@ -230,8 +230,8 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="other"></param>
 		/// <returns></returns>
 		public override bool Equals(Object other) {
-			if(other is Color) {
-				return Equals((Color)other);
+			if(other is IColor) {
+				return Equals((IColor)other);
 			}//end if
 			else {
 				return false;
@@ -252,7 +252,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static bool operator ==(Color a, Color b) {
+		public static bool operator==(Color a, IColor b) {
 			return a.Equals(b);
 		}//end ==
 		
@@ -262,7 +262,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static bool operator!=(Color a, Color b) {
+		public static bool operator!=(Color a, IColor b) {
 			return !a.Equals(b);
 		}//end !=
 
