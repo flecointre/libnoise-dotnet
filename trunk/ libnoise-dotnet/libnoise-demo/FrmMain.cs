@@ -18,11 +18,13 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Globalization;
+
 using Graphics.Tools.Noise.Primitive;
 using Graphics.Tools.Noise.Filter;
 using Graphics.Tools.Noise.Builder;
 using Graphics.Tools.Noise.Renderer;
 using Graphics.Tools.Noise.Modifier;
+using Graphics.Tools.Noise.Ext.Dotnet;
 
 namespace Graphics.Tools.Noise {
 
@@ -445,13 +447,15 @@ namespace Graphics.Tools.Noise {
 			//----------------------------------------
 			// Normalmap rendering test
 			//
+			/*
 			BitmapAdaptater nmapAdaptater = new BitmapAdaptater(width, height);
 			NormalMapRenderer nmap = new NormalMapRenderer();
 			nmap.Image = nmapAdaptater;
 			nmap.BumpHeight = 30.0f;
 			nmap.NoiseMap = noiseMap;
-			//nmap.Render();
-			//nmapAdaptater.Bitmap.Save("normalMap.png", ImageFormat.Png);
+			nmap.Render();
+			nmapAdaptater.Bitmap.Save("normalMap.png", ImageFormat.Png);
+			*/
 			//----------------------------------------
 
 			// ------------------------------------------------------------------------------------------------

@@ -96,7 +96,6 @@
     <Compile Include="src\Primitive\ImprovedPerlin.cs" />
     <Compile Include="src\Primitive\SimplexPerlin.cs" />
     <Compile Include="src\Renderer\AbstractRenderer.cs" />
-    <Compile Include="src\Renderer\BitmapAdaptater.cs" />
     <Compile Include="src\Renderer\IColor.cs" />
     <Compile Include="src\Renderer\ImageRenderer.cs" />
     <Compile Include="src\Renderer\NormalMapRenderer.cs" />
@@ -176,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Docs\" />
+    <Folder Include="src\Ext\Dotnet\" />
     <Folder Include="src\Ext\Unity3D\" />
     <Folder Include="src\Ext\Xna\" />
   </ItemGroup>

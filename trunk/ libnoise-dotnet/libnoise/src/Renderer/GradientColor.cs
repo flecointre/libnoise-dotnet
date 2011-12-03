@@ -68,8 +68,8 @@ namespace Graphics.Tools.Noise.Renderer {
 		public static GradientColor GRAYSCALE{
 			get {
 				GradientColor gradient = new GradientColor();
-				gradient.AddGradientPoint(-1, Color.BLACK);
-				gradient.AddGradientPoint(1, Color.WHITE);
+				gradient.AddGradientPoint(-1.0f, Color.BLACK);
+				gradient.AddGradientPoint(1.0f, Color.WHITE);
 				return gradient;
 			}
 		}
@@ -80,8 +80,8 @@ namespace Graphics.Tools.Noise.Renderer {
 		public static GradientColor EMPTY {
 			get {
 				GradientColor gradient = new GradientColor();
-				gradient.AddGradientPoint(-1, Color.TRANSPARENT);
-				gradient.AddGradientPoint(1, Color.TRANSPARENT);
+				gradient.AddGradientPoint(-1.0f, Color.TRANSPARENT);
+				gradient.AddGradientPoint(1.0f, Color.TRANSPARENT);
 				return gradient;
 			}
 		}
