@@ -412,7 +412,7 @@ namespace Graphics.Tools.Noise {
 			//Graphics.Tools.Noise.Renderer.Image image = new Graphics.Tools.Noise.Renderer.Image();
 			//renderer.Image = image;
 
-			// dotnet Bitmap Strategy
+			// Dotnet Bitmap Strategy
 			BitmapAdaptater bmpAdaptater = new BitmapAdaptater(width, height);
 			renderer.Image = bmpAdaptater;
 

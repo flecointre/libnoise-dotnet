@@ -87,15 +87,35 @@ namespace Graphics.Tools.Noise {
 		#region Interpolation methods
 
 		/// <summary>
-		/// Performs linear interpolation between two values.
+		/// Performs linear interpolation between two byte-values by a.
 		///
-		/// The alpha value should range from 0.0 to 1.0.  If the alpha value is
-		/// 0.0, this function returns n0.  If the alpha value is 1.0, this
+		/// The amount value should range from 0.0 to 1.0.  If the amount value is
+		/// 0.0, this function returns n0.  If the amount value is 1.0, this
 		/// function returns n1.
 		/// </summary>
 		/// <param name="n0">The first value.</param>
 		/// <param name="n1">The second value</param>
-		/// <param name="a">The alpha value</param>
+		/// <param name="a">the amount to interpolate between the two values</param>
+		/// <returns>The interpolated value</returns>
+		public static byte Lerp(byte n0, byte n1, float a) {
+
+			float c0 = (float)n0 / 255.0f;
+			float c1 = (float)n1 / 255.0f;
+
+			return (byte)((c0 + a * (c1 - c0)) * 255.0f);
+
+		}//end Lerp
+
+		/// <summary>
+		/// Performs linear interpolation between two float-values by a.
+		///
+		/// The amount value should range from 0.0 to 1.0.  If the amount value is
+		/// 0.0, this function returns n0.  If the amount value is 1.0, this
+		/// function returns n1.
+		/// </summary>
+		/// <param name="n0">The first value.</param>
+		/// <param name="n1">The second value</param>
+		/// <param name="a">the amount to interpolate between the two values</param>
 		/// <returns>The interpolated value</returns>
 		public static float Lerp(float n0, float n1, float a) {
 			//return ((1.0 - a) * n0) + (a * n1);
@@ -105,15 +125,15 @@ namespace Graphics.Tools.Noise {
 		/// <summary>
 		/// Performs cubic interpolation between two values bound between two other values.
 		///
-		/// The alpha value should range from 0.0 to 1.0.  If the alpha value is
-		/// 0.0, this function returns n1.  If the alpha value is 1.0, this
+		/// The amount value should range from 0.0 to 1.0.  If the amount value is
+		/// 0.0, this function returns n1.  If the amount value is 1.0, this
 		/// function returns n2.
 		/// </summary>
 		/// <param name="n0">The value before the first value</param>
 		/// <param name="n1">The first value</param>
 		/// <param name="n2">The second value</param>
 		/// <param name="n3">The value after the second value</param>
-		/// <param name="a">The alpha value</param>
+		/// <param name="a">the amount to interpolate between the two values</param>
 		/// <returns>The interpolated value.</returns>
 		public static float Cerp(float n0, float n1, float n2, float n3, float a) {
 			float p = (n3 - n2) - (n0 - n1);
