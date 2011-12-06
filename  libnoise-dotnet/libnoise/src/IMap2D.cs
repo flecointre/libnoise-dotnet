@@ -96,6 +96,13 @@ namespace Graphics.Tools.Noise {
 		/// </summary>
 		void Clear();
 
+		/// <summary>
+		/// Find the lowest and highest value in the map
+		/// </summary>
+		/// <param name="min">the lowest value</param>
+		/// <param name="max">the highest value</param>
+		void MinMax(out T min, out T max);
+
 		#endregion
 
 	}//end class

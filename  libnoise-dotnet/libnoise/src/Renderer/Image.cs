@@ -28,11 +28,17 @@ namespace Graphics.Tools.Noise.Renderer {
 	/// </summary>
 	public class Image :DataMap<Color>, IMap2D<Color> {
 
-		#region Fields
+		#region constants
 
-		#endregion
+		/// <summary>
+		/// The maximum width of a raster.
+		/// </summary>
+		public const int RASTER_MAX_WIDTH = 32767;
 
-		#region Accessors
+		/// <summary>
+		/// The maximum height of a raster.
+		/// </summary>
+		public const int RASTER_MAX_HEIGHT = 32767;
 
 		#endregion
 
@@ -41,6 +47,11 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// Create an empty Image
 		/// </summary>
 		public Image() {
+
+			_hasMaxDimension = true;
+			_maxHeight = RASTER_MAX_HEIGHT;
+			_maxWidth = RASTER_MAX_WIDTH;
+
 			_borderValue = Color.TRANSPARENT;
 			AllocateBuffer();
 		}//End NoiseMap
@@ -63,6 +74,11 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="width">The width of the new noise map.</param>
 		/// <param name="height">The height of the new noise map</param>
 		public Image(int width, int height){
+
+			_hasMaxDimension = true;
+			_maxHeight = RASTER_MAX_HEIGHT;
+			_maxWidth = RASTER_MAX_WIDTH;
+
 			_borderValue = Color.WHITE;
 			AllocateBuffer(width, height);
 			
@@ -74,6 +90,11 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// </summary>
 		/// <param name="copy">The image to copy</param>
 		public Image(Image copy) {
+
+			_hasMaxDimension = true;
+			_maxHeight = RASTER_MAX_HEIGHT;
+			_maxWidth = RASTER_MAX_WIDTH;
+
 			_borderValue = Color.WHITE;
 			CopyFrom(copy);
 		}//End NoiseMap
@@ -81,6 +102,37 @@ namespace Graphics.Tools.Noise.Renderer {
 		#endregion
 
 		#region Interaction
+
+		/// <summary>
+		/// Find the lowest and highest value in the map
+		/// </summary>
+		/// Cannot implement this method in DataMap because 
+		/// T < T or T > T does not compile (Unpredictable type of T)
+		/// <param name="min">the lowest value</param>
+		/// <param name="max">the highest value</param>
+		public void MinMax(out Color min, out Color max) {
+
+			min = max = MinvalofT();
+
+			if(_data != null && _data.Length > 0) {
+
+				// First value, min and max for now
+				min = max = _data[0];
+
+				for(int i = 0; i < _data.Length; i++) {
+
+					if(min > _data[i]) {
+						min = _data[i];
+					}//end if
+					else if(max < _data[i]) {
+						max = _data[i];
+					}//end else if
+
+				}//end for
+
+			}//end if
+
+		}//end MinMax
 
 		#endregion
 
@@ -93,6 +145,22 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <returns>The memory size of a Color</returns>
 		protected override int SizeofT() {
 			return 64; // 4* byte(8) + 1 int(32)
+		}//end protected
+
+		/// <summary>
+		/// Return the maximum value of a Color type (Solid white)
+		/// </summary>
+		/// <returns></returns>
+		protected override Color MaxvalofT() {
+			return Color.WHITE;
+		}//end protected
+
+		/// <summary>
+		/// Return the minimum value of a Color type (Solid black)
+		/// </summary>
+		/// <returns></returns>
+		protected override Color MinvalofT() {
+			return Color.BLACK;
 		}//end protected
 
 		#endregion

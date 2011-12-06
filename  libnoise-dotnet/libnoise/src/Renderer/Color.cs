@@ -354,7 +354,12 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <returns></returns>
 		public override bool Equals(Object other) {
 			if(other is IColor) {
-				return Equals((IColor)other);
+				return
+					_red == ((IColor)other).Red 
+					&& _green == ((IColor)other).Green 
+					&& _blue == ((IColor)other).Blue 
+					&& _alpha == ((IColor)other).Alpha;
+
 			}//end if
 			else {
 				return false;
@@ -375,7 +380,7 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static bool operator==(Color a, IColor b) {
+		public static bool operator ==(Color a, IColor b) {
 			return a.Equals(b);
 		}//end ==
 		
@@ -385,12 +390,59 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static bool operator!=(Color a, IColor b) {
+		public static bool operator !=(Color a, IColor b) {
 			return !a.Equals(b);
 		}//end !=
 
-		#endregion
+		/// <summary>
+		/// Overloading '>' operator:
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public static bool operator >(Color a, IColor b) {
+			return
+				a._red > b.Red 
+				&& a._green > b.Green 
+				&& a._blue > b.Blue 
+				&& a._alpha > b.Alpha;
+		}//end >
 
+		/// <summary>
+		/// Overloading '<' operator:
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public static bool operator <(Color a, IColor b) {
+			return
+				a._red < b.Red 
+				&& a._green < b.Green 
+				&& a._blue < b.Blue 
+				&& a._alpha < b.Alpha;
+		}//end <
+
+		/// <summary>
+		/// Overloading '>=' operator:
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public static bool operator >=(Color a, IColor b) {
+			return a > b || a == b;
+		}//end >=
+
+		/// <summary>
+		/// Overloading '<=' operator:
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public static bool operator <=(Color a, IColor b) {
+			return a < b || a == b;
+		}//end >=
+
+		#endregion
 	}//end Struct
 
 }//end namespace
