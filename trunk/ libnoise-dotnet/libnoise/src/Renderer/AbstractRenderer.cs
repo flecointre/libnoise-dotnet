@@ -22,7 +22,7 @@ namespace Graphics.Tools.Noise.Renderer {
 	/// A delegate to a callback function used by the Renderer classes.
 	///
 	/// The renderer method calls this callback function each
-	/// time it fills a row of the image.
+	/// time it fills a row of the target struct.
 	///
 	/// This callback function has a single integer parameter that contains
 	/// a count of the rows that have been completed.  It returns void.
@@ -45,11 +45,6 @@ namespace Graphics.Tools.Noise.Renderer {
 		/// </summary>
 		protected IMap2D<float> _noiseMap;
 
-		/// <summary>
-		/// The destination image
-		/// </summary>
-		protected IMap2D<IColor> _image;
-
 		#endregion
 
 		#region Accessors
@@ -60,14 +55,6 @@ namespace Graphics.Tools.Noise.Renderer {
 		public IMap2D<float> NoiseMap {
 			get { return _noiseMap; }
 			set { _noiseMap = value; }
-		}
-
-		/// <summary>
-		/// Gets or sets the destination image
-		/// </summary>
-		public IMap2D<IColor> Image {
-			get { return _image; }
-			set { _image = value; }
 		}
 
 		/// <summary>

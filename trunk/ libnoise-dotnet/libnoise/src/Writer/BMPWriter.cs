@@ -20,7 +20,7 @@ using System;
 using System.IO;
 using Graphics.Tools.Noise.Renderer;
 
-namespace Graphics.Tools.Noise.Utils {
+namespace Graphics.Tools.Noise.Writer {
 
 	/// <summary>
 	/// Windows bitmap image writer class.
@@ -37,7 +37,7 @@ namespace Graphics.Tools.Noise.Utils {
 	/// 
 	/// TODO convert BMPWriter to an extensible writing strategy based on image format (bmp, png, jpg, ...)
 	/// </summary>
-	public class BMPWriter {
+	public class BMPWriter : AbstractWriter{
 
 		#region constants
 		
@@ -55,24 +55,9 @@ namespace Graphics.Tools.Noise.Utils {
 		/// </summary>
 		protected Image _image;
 
-		/// <summary>
-		/// the name of the file to write.
-		/// </summary>
-		protected string _filename;
-
-		
-
 		#endregion
 
 		#region Accessors
-			
-		/// <summary>
-		/// Gets or sets the name of the file to write.
-		/// </summary>
-		public string Filename {
-			get { return _filename; }
-			set { _filename = value; }
-		}
 
 		/// <summary>
 		/// Gets or sets the destination image
@@ -86,6 +71,13 @@ namespace Graphics.Tools.Noise.Utils {
 
 		#region Ctor/Dtor
 
+		/// <summary>
+		/// 0-args constructor
+		/// </summary>
+		public BMPWriter() {
+
+		}//end BMPWriter
+
 		#endregion
 
 		#region Interaction
@@ -98,10 +90,11 @@ namespace Graphics.Tools.Noise.Utils {
 		///
 		/// @throw ArgumentException See the preconditions.
 		/// @throw IOException An I/O exception occurred.
+		/// 
 		/// Possibly the file could not be written.
 		/// 
 		/// </summary>
-		public void WriteFile(){ 
+		public override void WriteFile(){ 
 
 			if(_image == null) {
 				throw new ArgumentException("An image map must be provided");
@@ -117,13 +110,8 @@ namespace Graphics.Tools.Noise.Utils {
 			// This buffer holds one horizontal line in the destination file.
 			// Allocate a buffer to hold one horizontal line in the bitmap.
 			byte[] pLineBuffer = new byte[bufferSize];
-
-			if(File.Exists(_filename)){
-				File.Delete(_filename);
-			}//end if
-
-			FileStream stream = new FileStream(_filename, FileMode.Create);
-			BinaryWriter writer = new BinaryWriter(stream);
+			
+			OpenFile();
 
 			// Build and write the header.
 			// A 32 bit buffer
@@ -135,54 +123,58 @@ namespace Graphics.Tools.Noise.Utils {
 			b2[0] = 0x42; //B
 			b2[1] = 0x4D; //M
 
-			writer.Write(b2); //BM Magic number 424D 
-			writer.Write(Libnoise.UnpackLittleUint32(destSize + BMP_HEADER_SIZE, ref b4));
+			try {
+				_writer.Write(b2); //BM Magic number 424D 
+				_writer.Write(Libnoise.UnpackLittleUint32(destSize + BMP_HEADER_SIZE, ref b4));
 
-			writer.Write(Libnoise.UnpackLittleUint32(0, ref b4));
+				_writer.Write(Libnoise.UnpackLittleUint32(0, ref b4));
 
-			writer.Write(Libnoise.UnpackLittleUint32(BMP_HEADER_SIZE, ref b4));
-			writer.Write(Libnoise.UnpackLittleUint32(40, ref b4)); // Palette offset
-			writer.Write(Libnoise.UnpackLittleUint32(width, ref b4)); // width
-			writer.Write(Libnoise.UnpackLittleUint32(height, ref b4)); // height
-			writer.Write(Libnoise.UnpackLittleUint16((short)1, ref b2)); // Planes per pixel
-			writer.Write(Libnoise.UnpackLittleUint16((short)24, ref b2)); // Bits per plane
+				_writer.Write(Libnoise.UnpackLittleUint32(BMP_HEADER_SIZE, ref b4));
+				_writer.Write(Libnoise.UnpackLittleUint32(40, ref b4)); // Palette offset
+				_writer.Write(Libnoise.UnpackLittleUint32(width, ref b4)); // width
+				_writer.Write(Libnoise.UnpackLittleUint32(height, ref b4)); // height
+				_writer.Write(Libnoise.UnpackLittleUint16((short)1, ref b2)); // Planes per pixel
+				_writer.Write(Libnoise.UnpackLittleUint16((short)24, ref b2)); // Bits per plane
 
-			writer.Write(Libnoise.UnpackLittleUint32(0, ref b4)); // Compression (0 = none)
+				_writer.Write(Libnoise.UnpackLittleUint32(0, ref b4)); // Compression (0 = none)
 
-			writer.Write(Libnoise.UnpackLittleUint32(destSize, ref b4));
-			writer.Write(Libnoise.UnpackLittleUint32(2834, ref b4)); // X pixels per meter
-			writer.Write(Libnoise.UnpackLittleUint32(2834, ref b4)); // Y pixels per meter
+				_writer.Write(Libnoise.UnpackLittleUint32(destSize, ref b4));
+				_writer.Write(Libnoise.UnpackLittleUint32(2834, ref b4)); // X pixels per meter
+				_writer.Write(Libnoise.UnpackLittleUint32(2834, ref b4)); // Y pixels per meter
 
-			writer.Write(Libnoise.UnpackLittleUint32(0, ref b4));
-			writer.Write(b4);
+				_writer.Write(Libnoise.UnpackLittleUint32(0, ref b4));
+				_writer.Write(b4);
 
-			// Build and write each horizontal line to the file.
-			for (int y = 0; y < height; y++){
+				// Build and write each horizontal line to the file.
+				for (int y = 0; y < height; y++){
 
-				int i = 0;
+					int i = 0;
 
-				// Each line is aligned to a 32-bit boundary (\0 padding)
-				Array.Clear(pLineBuffer, 0, pLineBuffer.Length);
+					// Each line is aligned to a 32-bit boundary (\0 padding)
+					Array.Clear(pLineBuffer, 0, pLineBuffer.Length);
 
-				Color pSource;
+					Color pSource;
 
-				for (int x = 0; x < width; x++) {
+					for (int x = 0; x < width; x++) {
 
-					pSource = _image.GetValue(x, y);
+						pSource = _image.GetValue(x, y);
 
-					// Little endian order : B G R
-					pLineBuffer[i++] = pSource.Blue;
-					pLineBuffer[i++] = pSource.Green;
-					pLineBuffer[i++] = pSource.Red;
+						// Little endian order : B G R
+						pLineBuffer[i++] = pSource.Blue;
+						pLineBuffer[i++] = pSource.Green;
+						pLineBuffer[i++] = pSource.Red;
+
+					}//end for
+
+					_writer.Write(pLineBuffer);
 
 				}//end for
+			}//end try
+			catch(Exception e) {
+				throw new IOException("Unknown IO exception", e);
+			}//end catch
 
-				writer.Write(pLineBuffer);
-
-			}//end for
-
-			writer.Close();
-			stream.Close();
+			CloseFile();
 
 		}//end WriteFile
 

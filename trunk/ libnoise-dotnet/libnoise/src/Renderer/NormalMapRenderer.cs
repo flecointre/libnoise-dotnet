@@ -46,7 +46,7 @@ namespace Graphics.Tools.Noise.Renderer {
 	/// - Pass an IMap2D<Color> object to the Image property.
 	/// - Call the Render() method.
 	/// </summary>
-	public class NormalMapRenderer :AbstractRenderer {
+	public class NormalMapRenderer :AbstractImageRenderer {
 
 		#region Fields
 
@@ -62,7 +62,7 @@ namespace Graphics.Tools.Noise.Renderer {
         /// Enabling wrapping is useful when creating spherical and tileable
         /// normal maps.
 		/// </summary>
-		bool _WrapEnabled;
+		protected bool _WrapEnabled;
 
 		/// <summary>
         /// The bump height specifies the ratio of spatial resolution to
@@ -73,7 +73,7 @@ namespace Graphics.Tools.Noise.Renderer {
         /// The spatial resolution and elevation resolution are determined by
         /// the application.
 		/// </summary>
-		float _bumpHeight;
+		protected float _bumpHeight;
 
 		#endregion
 
@@ -148,16 +148,12 @@ namespace Graphics.Tools.Noise.Renderer {
 
 			_image.SetSize(width, height);
 
-			float pSource;
-
 			for(int y = 0; y < height; y++) {
 
 				for(int x = 0; x < width; x++) {
 
-					pSource = _noiseMap.GetValue(x, y);
-
-					  // Calculate the positions of the current point's right and up
-					  // neighbors.
+					 // Calculate the positions of the current point's right and up
+					 // neighbors.
 					int yUpOffset, xRightOffset;
 
 					if(_WrapEnabled) {

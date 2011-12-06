@@ -112,7 +112,7 @@ namespace Graphics.Tools.Noise.Renderer {
 	/// - Pass an Image object to the BackgroundImage property (optional)
 	/// - Call the Render() method.
 	/// </summary>
-	public class ImageRenderer: AbstractRenderer {
+	public class ImageRenderer: AbstractImageRenderer {
 
 		#region Fields
 

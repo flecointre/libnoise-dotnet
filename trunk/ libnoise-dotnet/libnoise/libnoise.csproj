@@ -95,7 +95,15 @@
     <Compile Include="src\Primitive\BevinsGradient.cs" />
     <Compile Include="src\Primitive\ImprovedPerlin.cs" />
     <Compile Include="src\Primitive\SimplexPerlin.cs" />
+    <Compile Include="src\Renderer\AbstractHeightmapRenderer.cs" />
+    <Compile Include="src\Renderer\AbstractImageRenderer.cs" />
     <Compile Include="src\Renderer\AbstractRenderer.cs" />
+    <Compile Include="src\Renderer\Heightmap16.cs" />
+    <Compile Include="src\Renderer\Heightmap16Renderer.cs" />
+    <Compile Include="src\Renderer\Heightmap32.cs" />
+    <Compile Include="src\Renderer\Heightmap32Renderer.cs" />
+    <Compile Include="src\Renderer\Heightmap8.cs" />
+    <Compile Include="src\Renderer\Heightmap8Renderer.cs" />
     <Compile Include="src\Renderer\IColor.cs" />
     <Compile Include="src\Renderer\ImageRenderer.cs" />
     <Compile Include="src\Renderer\NormalMapRenderer.cs" />
@@ -137,7 +145,11 @@
     <Compile Include="src\Builder\NoiseMapBuilder.cs" />
     <Compile Include="src\Builder\NoiseMapBuilderPlane.cs" />
     <Compile Include="src\Model\Plane.cs" />
-    <Compile Include="src\Utils\BMPWriter.cs" />
+    <Compile Include="src\Writer\BMPWriter.cs" />
+    <Compile Include="src\Writer\AbstractWriter.cs" />
+    <Compile Include="src\Writer\Heightmap32RawWriter.cs" />
+    <Compile Include="src\Writer\Heightmap16RawWriter.cs" />
+    <Compile Include="src\Writer\Heightmap8RawWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

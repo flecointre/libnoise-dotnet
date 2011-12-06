@@ -59,20 +59,6 @@ namespace Graphics.Tools.Noise.Utils {
 	/// </summary>
 	abstract public class DataMap<T> {
 
-		#region constants
-
-		/// <summary>
-		/// The maximum width of a raster.
-		/// </summary>
-		public const int RASTER_MAX_WIDTH = 32767;
-
-		/// <summary>
-		/// The maximum height of a raster.
-		/// </summary>
-		public const int RASTER_MAX_HEIGHT = 32767;
-
-		#endregion
-
 		#region Fields
 
 		/// <summary>
@@ -111,6 +97,21 @@ namespace Graphics.Tools.Noise.Utils {
 		/// The noise map buffer.
 		/// </summary>
 		protected T[] _data = null;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		protected bool _hasMaxDimension = false;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		protected int _maxWidth = 0;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		protected int _maxHeight = 0;
 
 		#endregion
 
@@ -302,8 +303,8 @@ namespace Graphics.Tools.Noise.Utils {
 			if(width < 0 || height < 0) {
 				throw new ArgumentException("Map dimension must be greater or equal 0");
 			}//end if
-			else if(width > RASTER_MAX_WIDTH || height > RASTER_MAX_HEIGHT) {
-				throw new ArgumentException("Map dimension muste be lower than RASTER_MAX_WIDTH and RASTER_MAX_HEIGHT");
+			else if(_hasMaxDimension && (width > _maxWidth || height > _maxHeight)) {
+				throw new ArgumentException(String.Format("Map dimension must be lower than {0} * {1}", _maxWidth, _maxHeight));
 			}//end if
 			else {
 				AllocateBuffer(width, height);
@@ -360,6 +361,20 @@ namespace Graphics.Tools.Noise.Utils {
 
 			int size = (_data.Length > buffer.Length) ? buffer.Length : _data.Length;
 			Array.Copy(_data, 0, buffer, 0, size);
+
+		}//end Copy
+
+		/// <summary>
+		/// Share the internal buffer
+		/// </summary>
+		/// <param name="buffer">The internal buffer</param>
+		public T[] Share() {
+
+			if(_data == null) {
+				throw new NullReferenceException("The internal buffer is null");
+			}//end if
+
+			return _data;
 
 		}//end Copy
 
@@ -437,6 +452,18 @@ namespace Graphics.Tools.Noise.Utils {
 		/// </summary>
 		/// <returns>The memory size of the type of data</returns>
 		abstract protected int SizeofT();
+
+		/// <summary>
+		/// Return the minimum value of the type of data
+		/// </summary>
+		/// <returns></returns>
+		abstract protected T MinvalofT();
+	
+		/// <summary>
+		/// Return the maximum value of the type of data
+		/// </summary>
+		/// <returns></returns>
+		abstract protected T MaxvalofT();
 
 		/// <summary>
 		/// Allocate a buffer

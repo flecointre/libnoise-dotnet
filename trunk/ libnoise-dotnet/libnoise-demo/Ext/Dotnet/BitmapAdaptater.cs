@@ -101,7 +101,6 @@ namespace Graphics.Tools.Noise.Ext.Dotnet {
 
 		#endregion
 
-
 		#region IMap2D<IColor> Members
 
 		/// <summary>
@@ -185,6 +184,15 @@ namespace Graphics.Tools.Noise.Ext.Dotnet {
 		/// Clears the bitmap to a Color.WHITE value
 		/// </summary>
 		public void Clear() {
+			throw new System.NotImplementedException();
+		}//end Clear
+
+		/// <summary>
+		/// Find the lowest and highest value in the map
+		/// </summary>
+		/// <param name="min">the lowest value</param>
+		/// <param name="max">the highest value</param>
+		public void MinMax(out NoiseNS::IColor min, out NoiseNS::IColor max) {
 			throw new System.NotImplementedException();
 		}//end Clear
 

@@ -24,6 +24,7 @@ using Graphics.Tools.Noise.Filter;
 using Graphics.Tools.Noise.Builder;
 using Graphics.Tools.Noise.Renderer;
 using Graphics.Tools.Noise.Modifier;
+using Graphics.Tools.Noise.Writer;
 using Graphics.Tools.Noise.Ext.Dotnet;
 
 namespace Graphics.Tools.Noise {
@@ -457,6 +458,37 @@ namespace Graphics.Tools.Noise {
 			nmapAdaptater.Bitmap.Save("normalMap.png", ImageFormat.Png);
 			*/
 			//----------------------------------------
+
+			/*
+			Heightmap8 heightmap8 = new Heightmap8();
+			Heightmap8Renderer heightmapRenderer = new Heightmap8Renderer();
+			heightmapRenderer.Heightmap = heightmap8;
+			*/
+			
+			/*
+			Heightmap16 heightmap16 = new Heightmap16();
+			Heightmap16Renderer heightmapRenderer = new Heightmap16Renderer();
+			heightmapRenderer.Heightmap = heightmap16;
+			*/
+
+			/*
+			Heightmap32 heightmap32 = new Heightmap32();
+			Heightmap32Renderer heightmapRenderer = new Heightmap32Renderer();
+			heightmapRenderer.Heightmap = heightmap32;
+			*/
+
+			/*
+			heightmapRenderer.NoiseMap = noiseMap;
+			heightmapRenderer.ExactFit();
+			heightmapRenderer.Render();
+			*/
+
+			/*
+			Heightmap16RawWriter rawWriter = new Heightmap16RawWriter();
+			rawWriter.Heightmap = heightmap16;
+			rawWriter.Filename = "heightmap16.raw";
+			rawWriter.WriteFile();
+			*/
 
 			// ------------------------------------------------------------------------------------------------
 			// 3 - Painting
