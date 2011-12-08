@@ -107,6 +107,8 @@
     <Compile Include="src\Renderer\IColor.cs" />
     <Compile Include="src\Renderer\ImageRenderer.cs" />
     <Compile Include="src\Renderer\NormalMapRenderer.cs" />
+    <Compile Include="src\Builder\IBuilderFilter.cs" />
+    <Compile Include="src\Builder\ShapeFilter.cs" />
     <Compile Include="src\Utils\DataMap.cs" />
     <Compile Include="src\Renderer\Color.cs" />
     <Compile Include="src\Modifier\ControlPoint.cs" />

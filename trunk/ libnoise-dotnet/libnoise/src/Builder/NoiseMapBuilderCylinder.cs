@@ -200,8 +200,29 @@ namespace Graphics.Tools.Noise.Builder {
 
 				for(int x = 0; x < _width; x++) {
 
-					float curValue = (float)model.GetValue(curAngle, curHeight);
-					_noiseMap.SetValue(x, y, curValue);
+
+					float finalValue;
+					FilterLevel level = FilterLevel.Source;
+
+					if(_filter != null) {
+						level = _filter.IsFiltered(x, y);
+					}//end if
+
+					if(level == FilterLevel.Constant) {
+						finalValue = _filter.ConstantValue;
+					}//end if
+					else {
+
+						finalValue = (float)model.GetValue(curAngle, curHeight);
+
+						if(level == FilterLevel.Filter) {
+							finalValue = _filter.FilterValue(x, y, finalValue);
+						}//end if
+
+					}//end else
+
+					_noiseMap.SetValue(x, y, finalValue);
+
 					curAngle += xDelta;
 
 				}//end for

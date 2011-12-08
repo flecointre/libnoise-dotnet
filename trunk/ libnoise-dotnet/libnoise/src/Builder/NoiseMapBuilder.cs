@@ -96,6 +96,11 @@ namespace Graphics.Tools.Noise.Builder {
 		/// </summary>
 		protected int _height = 0;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		protected IBuilderFilter _filter;
+
 		#endregion
 
 		#region Accessors
@@ -136,6 +141,14 @@ namespace Graphics.Tools.Noise.Builder {
 		/// </summary>
 		public int Height {
 			get { return _height; }
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public IBuilderFilter Filter{
+			get { return _filter; }
+			set { _filter = value; }
 		}
 
 		#endregion
