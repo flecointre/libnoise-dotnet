@@ -194,9 +194,27 @@ namespace Graphics.Tools.Noise.Builder {
 				curLon = _westLonBound;
 
 				for (int x = 0; x < _width; x++) {
-					float curValue = model.GetValue(curLat, curLon);
 
-					_noiseMap.SetValue(x, y, curValue);
+					float finalValue;
+					FilterLevel level = FilterLevel.Source;
+
+					if(_filter != null) {
+						level = _filter.IsFiltered(x, y);
+					}//end if
+
+					if(level == FilterLevel.Constant) {
+						finalValue = _filter.ConstantValue;
+					}//end if
+					else {
+						finalValue = model.GetValue(curLat, curLon);
+
+						if(level == FilterLevel.Filter) {
+							finalValue = _filter.FilterValue(x, y, finalValue);
+						}//end if
+
+					}//end else
+
+					_noiseMap.SetValue(x, y, finalValue);
 
 					curLon += xDelta;
 

@@ -487,7 +487,7 @@ namespace Graphics.Tools.Noise.Utils {
 				Array.Resize<T>(ref _data, _cellsCount);
 			}//end elseif
 
-		}//end Clear
+		}//end AllocateBuffer
 
 		/// <summary>
 		/// Allocate a buffer, assuming width and height are correct values @see SetSize(int, int)

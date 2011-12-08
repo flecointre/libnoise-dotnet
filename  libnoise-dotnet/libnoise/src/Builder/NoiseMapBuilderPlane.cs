@@ -36,7 +36,7 @@ namespace Graphics.Tools.Noise.Builder {
 	/// To make a tileable noise map with no seams at the edges, use the 
 	/// Seamless property.
 	/// </summary>
-	public class NoiseMapBuilderPlane : NoiseMapBuilder{
+	public class NoiseMapBuilderPlane :NoiseMapBuilder {
 
 		#region Fields
 
@@ -224,26 +224,42 @@ namespace Graphics.Tools.Noise.Builder {
 				for (int x = 0; x < _width; x++) {
 
 					float finalValue;
+					FilterLevel level = FilterLevel.Source;
 
-					if (_seamless) {
+					if(_filter != null) {
+						level = _filter.IsFiltered(x, z);
+					}//end if
 
-						float swValue, seValue, nwValue, neValue;
-						
-						swValue = model.GetValue(xCur, zCur);
-						seValue = model.GetValue(xCur + xExtent, zCur);
-						nwValue = model.GetValue(xCur, zCur + zExtent);
-						neValue = model.GetValue(xCur + xExtent, zCur + zExtent);
-
-						float xBlend = 1.0f - ((xCur - _lowerXBound) / xExtent);
-						float zBlend = 1.0f - ((zCur - _lowerZBound) / zExtent);
-
-						float z0 = Libnoise.Lerp(swValue, seValue, xBlend);
-						float z1 = Libnoise.Lerp(nwValue, neValue, xBlend);
-
-						finalValue = (float)Libnoise.Lerp(z0, z1, zBlend);
+					if(level == FilterLevel.Constant) {
+						finalValue = _filter.ConstantValue;
 					}//end if
 					else {
-						finalValue = (float)model.GetValue(xCur, zCur);
+
+						if(_seamless) {
+
+							float swValue, seValue, nwValue, neValue;
+
+							swValue = model.GetValue(xCur, zCur);
+							seValue = model.GetValue(xCur + xExtent, zCur);
+							nwValue = model.GetValue(xCur, zCur + zExtent);
+							neValue = model.GetValue(xCur + xExtent, zCur + zExtent);
+
+							float xBlend = 1.0f - ((xCur - _lowerXBound) / xExtent);
+							float zBlend = 1.0f - ((zCur - _lowerZBound) / zExtent);
+
+							float z0 = Libnoise.Lerp(swValue, seValue, xBlend);
+							float z1 = Libnoise.Lerp(nwValue, neValue, xBlend);
+
+							finalValue = (float)Libnoise.Lerp(z0, z1, zBlend);
+						}//end if
+						else {
+							finalValue = (float)model.GetValue(xCur, zCur);
+						}//end else
+
+						if(level == FilterLevel.Filter) {
+							finalValue = _filter.FilterValue(x, z, finalValue);
+						}//end if
+
 					}//end else
 
 					_noiseMap.SetValue(x, z, finalValue);

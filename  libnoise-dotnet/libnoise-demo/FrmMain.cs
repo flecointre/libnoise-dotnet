@@ -356,6 +356,7 @@ namespace Graphics.Tools.Noise {
 			TimeSpan ts;
 			double elaspedTime = 0;
 
+			//
 			// ------------------------------------------------------------------------------------------------
 			// 1 - Build the noise map
 			watchDog.Reset();
@@ -364,6 +365,17 @@ namespace Graphics.Tools.Noise {
 			_lblLog.Text += "Building noise map ... ";
 
 			NoiseMap noiseMap = new NoiseMap();
+
+			/* 
+			// ShapeFilter test
+			Bitmap bmpShape = new Bitmap("smileyShape.bmp");
+			BitmapAdaptater bmShapeAdaptater = new BitmapAdaptater(bmpShape);
+
+			ShapeFilter shapeFilter = new ShapeFilter();
+			shapeFilter.Shape = bmShapeAdaptater;
+
+			projection.Filter = shapeFilter;
+			*/
 
 			projection.SetSize(width, height);
 			projection.SourceModule  = finalModule;

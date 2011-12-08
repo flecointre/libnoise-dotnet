@@ -23,7 +23,6 @@ namespace Graphics.Tools.Noise {
 	/// </summary>
 	abstract public class SelectorModule :IModule {
 
-
 	}//end class
 
 }//end namespace
